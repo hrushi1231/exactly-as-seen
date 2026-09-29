@@ -186,7 +186,16 @@ function SyllabusAdmin() {
         if (error) throw new Error(error.message);
       }
     },
-    onSuccess: refresh,
+    onMutate: (input) => {
+      const key = [TABLES[input.type]];
+      const order = new Map(input.rows.map((r) => [r.id, r.display_order]));
+      queryClient.setQueryData(key, (old: Array<{ id: string; display_order: number }> | undefined) =>
+        old
+          ?.map((row) => (order.has(row.id) ? { ...row, display_order: order.get(row.id)! } : row))
+          .sort((a, b) => a.display_order - b.display_order),
+      );
+    },
+    onSettled: refresh,
     onError: (error: Error) => toast.error(error.message),
   });
 
@@ -402,6 +411,7 @@ function SyllabusAdmin() {
   const sources = useQuery({ queryKey: ["sources"], queryFn: fetchSources });
 
   function move(type: EntityType, list: Array<{ id: string }>, index: number, delta: number) {
+    if (reorder.isPending) return;
     const next = index + delta;
     if (next < 0 || next >= list.length) return;
     const ordered = [...list];
