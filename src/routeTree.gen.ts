@@ -24,6 +24,7 @@ import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authentic
 import { Route as AuthenticatedAdminCollectionRunsRouteImport } from './routes/_authenticated/admin/collection-runs'
 import { Route as AuthenticatedAdminDocumentsRouteImport } from './routes/_authenticated/admin/documents'
 import { Route as AuthenticatedAdminExamsRouteImport } from './routes/_authenticated/admin/exams'
+import { Route as AuthenticatedAdminPyqDiscoveryRouteImport } from './routes/_authenticated/admin/pyq-discovery'
 import { Route as AuthenticatedAdminSourcesRouteImport } from './routes/_authenticated/admin/sources'
 import { Route as AuthenticatedAdminSyllabusRouteImport } from './routes/_authenticated/admin/syllabus'
 
@@ -103,6 +104,12 @@ const AuthenticatedAdminExamsRoute = AuthenticatedAdminExamsRouteImport.update({
   path: '/exams',
   getParentRoute: () => AuthenticatedAdminRouteRoute,
 } as any)
+const AuthenticatedAdminPyqDiscoveryRoute =
+  AuthenticatedAdminPyqDiscoveryRouteImport.update({
+    id: '/pyq-discovery',
+    path: '/pyq-discovery',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 const AuthenticatedAdminSourcesRoute =
   AuthenticatedAdminSourcesRouteImport.update({
     id: '/sources',
@@ -130,6 +137,7 @@ export interface FileRoutesByFullPath {
   '/admin/collection-runs': typeof AuthenticatedAdminCollectionRunsRoute
   '/admin/documents': typeof AuthenticatedAdminDocumentsRoute
   '/admin/exams': typeof AuthenticatedAdminExamsRoute
+  '/admin/pyq-discovery': typeof AuthenticatedAdminPyqDiscoveryRoute
   '/admin/sources': typeof AuthenticatedAdminSourcesRoute
   '/admin/syllabus': typeof AuthenticatedAdminSyllabusRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
@@ -147,6 +155,7 @@ export interface FileRoutesByTo {
   '/admin/collection-runs': typeof AuthenticatedAdminCollectionRunsRoute
   '/admin/documents': typeof AuthenticatedAdminDocumentsRoute
   '/admin/exams': typeof AuthenticatedAdminExamsRoute
+  '/admin/pyq-discovery': typeof AuthenticatedAdminPyqDiscoveryRoute
   '/admin/sources': typeof AuthenticatedAdminSourcesRoute
   '/admin/syllabus': typeof AuthenticatedAdminSyllabusRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
@@ -167,6 +176,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/collection-runs': typeof AuthenticatedAdminCollectionRunsRoute
   '/_authenticated/admin/documents': typeof AuthenticatedAdminDocumentsRoute
   '/_authenticated/admin/exams': typeof AuthenticatedAdminExamsRoute
+  '/_authenticated/admin/pyq-discovery': typeof AuthenticatedAdminPyqDiscoveryRoute
   '/_authenticated/admin/sources': typeof AuthenticatedAdminSourcesRoute
   '/_authenticated/admin/syllabus': typeof AuthenticatedAdminSyllabusRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
@@ -187,6 +197,7 @@ export interface FileRouteTypes {
     | '/admin/collection-runs'
     | '/admin/documents'
     | '/admin/exams'
+    | '/admin/pyq-discovery'
     | '/admin/sources'
     | '/admin/syllabus'
     | '/admin/'
@@ -204,6 +215,7 @@ export interface FileRouteTypes {
     | '/admin/collection-runs'
     | '/admin/documents'
     | '/admin/exams'
+    | '/admin/pyq-discovery'
     | '/admin/sources'
     | '/admin/syllabus'
     | '/admin'
@@ -223,6 +235,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/collection-runs'
     | '/_authenticated/admin/documents'
     | '/_authenticated/admin/exams'
+    | '/_authenticated/admin/pyq-discovery'
     | '/_authenticated/admin/sources'
     | '/_authenticated/admin/syllabus'
     | '/_authenticated/admin/'
@@ -341,6 +354,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminExamsRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
+    '/_authenticated/admin/pyq-discovery': {
+      id: '/_authenticated/admin/pyq-discovery'
+      path: '/pyq-discovery'
+      fullPath: '/admin/pyq-discovery'
+      preLoaderRoute: typeof AuthenticatedAdminPyqDiscoveryRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
     '/_authenticated/admin/sources': {
       id: '/_authenticated/admin/sources'
       path: '/sources'
@@ -362,6 +382,7 @@ interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminCollectionRunsRoute: typeof AuthenticatedAdminCollectionRunsRoute
   AuthenticatedAdminDocumentsRoute: typeof AuthenticatedAdminDocumentsRoute
   AuthenticatedAdminExamsRoute: typeof AuthenticatedAdminExamsRoute
+  AuthenticatedAdminPyqDiscoveryRoute: typeof AuthenticatedAdminPyqDiscoveryRoute
   AuthenticatedAdminSourcesRoute: typeof AuthenticatedAdminSourcesRoute
   AuthenticatedAdminSyllabusRoute: typeof AuthenticatedAdminSyllabusRoute
   AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
@@ -373,6 +394,7 @@ const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren
       AuthenticatedAdminCollectionRunsRoute,
     AuthenticatedAdminDocumentsRoute: AuthenticatedAdminDocumentsRoute,
     AuthenticatedAdminExamsRoute: AuthenticatedAdminExamsRoute,
+    AuthenticatedAdminPyqDiscoveryRoute: AuthenticatedAdminPyqDiscoveryRoute,
     AuthenticatedAdminSourcesRoute: AuthenticatedAdminSourcesRoute,
     AuthenticatedAdminSyllabusRoute: AuthenticatedAdminSyllabusRoute,
     AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
