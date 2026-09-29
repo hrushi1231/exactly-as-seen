@@ -216,19 +216,34 @@ export type Database = {
       }
       discovery_candidates: {
         Row: {
+          advertisement_numbers: string[]
           artifact_type_guess: string
+          authority: string
           authority_guess: string
           canonical_url: string
+          captions_available: boolean | null
           confidence: number
           cycle_ids: string[]
+          depth: number
           discovered_at: string
           discovery_queries: string[]
           document_id: string | null
+          exam_dates: string[]
           exam_id: string | null
+          file_checks: Json | null
           id: string
           is_downloadable: boolean
+          page_title: string | null
+          parent_candidate_id: string | null
+          post_matches: string[]
           post_type_guess: string
           provider: string
+          publication_date: string | null
+          resolution_reason: string | null
+          resolution_score: number | null
+          resolution_status: string
+          resolved_artifact_type: string | null
+          resolved_at: string | null
           snippet: string | null
           source_domain: string
           source_kind: string
@@ -237,23 +252,45 @@ export type Database = {
           updated_at: string
           url: string
           video_channel: string | null
+          video_class: string | null
+          video_description: string | null
+          video_duration_seconds: number | null
+          video_id: string | null
           video_published_at: string | null
+          year_confidence: string | null
+          year_evidence: string | null
           year_guess: number | null
+          year_value: number | null
         }
         Insert: {
+          advertisement_numbers?: string[]
           artifact_type_guess?: string
+          authority?: string
           authority_guess?: string
           canonical_url: string
+          captions_available?: boolean | null
           confidence?: number
           cycle_ids?: string[]
+          depth?: number
           discovered_at?: string
           discovery_queries?: string[]
           document_id?: string | null
+          exam_dates?: string[]
           exam_id?: string | null
+          file_checks?: Json | null
           id?: string
           is_downloadable?: boolean
+          page_title?: string | null
+          parent_candidate_id?: string | null
+          post_matches?: string[]
           post_type_guess?: string
           provider: string
+          publication_date?: string | null
+          resolution_reason?: string | null
+          resolution_score?: number | null
+          resolution_status?: string
+          resolved_artifact_type?: string | null
+          resolved_at?: string | null
           snippet?: string | null
           source_domain: string
           source_kind?: string
@@ -262,23 +299,45 @@ export type Database = {
           updated_at?: string
           url: string
           video_channel?: string | null
+          video_class?: string | null
+          video_description?: string | null
+          video_duration_seconds?: number | null
+          video_id?: string | null
           video_published_at?: string | null
+          year_confidence?: string | null
+          year_evidence?: string | null
           year_guess?: number | null
+          year_value?: number | null
         }
         Update: {
+          advertisement_numbers?: string[]
           artifact_type_guess?: string
+          authority?: string
           authority_guess?: string
           canonical_url?: string
+          captions_available?: boolean | null
           confidence?: number
           cycle_ids?: string[]
+          depth?: number
           discovered_at?: string
           discovery_queries?: string[]
           document_id?: string | null
+          exam_dates?: string[]
           exam_id?: string | null
+          file_checks?: Json | null
           id?: string
           is_downloadable?: boolean
+          page_title?: string | null
+          parent_candidate_id?: string | null
+          post_matches?: string[]
           post_type_guess?: string
           provider?: string
+          publication_date?: string | null
+          resolution_reason?: string | null
+          resolution_score?: number | null
+          resolution_status?: string
+          resolved_artifact_type?: string | null
+          resolved_at?: string | null
           snippet?: string | null
           source_domain?: string
           source_kind?: string
@@ -287,8 +346,15 @@ export type Database = {
           updated_at?: string
           url?: string
           video_channel?: string | null
+          video_class?: string | null
+          video_description?: string | null
+          video_duration_seconds?: number | null
+          video_id?: string | null
           video_published_at?: string | null
+          year_confidence?: string | null
+          year_evidence?: string | null
           year_guess?: number | null
+          year_value?: number | null
         }
         Relationships: [
           {
@@ -303,6 +369,13 @@ export type Database = {
             columns: ["exam_id"]
             isOneToOne: false
             referencedRelation: "exams"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discovery_candidates_parent_candidate_id_fkey"
+            columns: ["parent_candidate_id"]
+            isOneToOne: false
+            referencedRelation: "discovery_candidates"
             referencedColumns: ["id"]
           },
         ]
@@ -444,6 +517,7 @@ export type Database = {
         Row: {
           authority_level: string
           created_at: string
+          cycle_id: string | null
           discovered_at: string
           document_type: string
           download_status: string
@@ -471,6 +545,7 @@ export type Database = {
         Insert: {
           authority_level?: string
           created_at?: string
+          cycle_id?: string | null
           discovered_at?: string
           document_type?: string
           download_status?: string
@@ -498,6 +573,7 @@ export type Database = {
         Update: {
           authority_level?: string
           created_at?: string
+          cycle_id?: string | null
           discovered_at?: string
           document_type?: string
           download_status?: string
@@ -524,6 +600,13 @@ export type Database = {
         }
         Relationships: [
           {
+            foreignKeyName: "documents_cycle_id_fkey"
+            columns: ["cycle_id"]
+            isOneToOne: false
+            referencedRelation: "exam_cycles"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "documents_duplicate_of_document_id_fkey"
             columns: ["duplicate_of_document_id"]
             isOneToOne: false
@@ -542,6 +625,132 @@ export type Database = {
             columns: ["source_domain_id"]
             isOneToOne: false
             referencedRelation: "source_domains"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      evidence_claims: {
+        Row: {
+          authority: string
+          candidate_id: string | null
+          claim: string
+          claim_type: string
+          created_at: string
+          cycle_id: string | null
+          document_id: string | null
+          excerpt: string | null
+          id: string
+          post_type: string | null
+          source_url: string
+        }
+        Insert: {
+          authority?: string
+          candidate_id?: string | null
+          claim: string
+          claim_type: string
+          created_at?: string
+          cycle_id?: string | null
+          document_id?: string | null
+          excerpt?: string | null
+          id?: string
+          post_type?: string | null
+          source_url: string
+        }
+        Update: {
+          authority?: string
+          candidate_id?: string | null
+          claim?: string
+          claim_type?: string
+          created_at?: string
+          cycle_id?: string | null
+          document_id?: string | null
+          excerpt?: string | null
+          id?: string
+          post_type?: string | null
+          source_url?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "evidence_claims_candidate_id_fkey"
+            columns: ["candidate_id"]
+            isOneToOne: false
+            referencedRelation: "discovery_candidates"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "evidence_claims_cycle_id_fkey"
+            columns: ["cycle_id"]
+            isOneToOne: false
+            referencedRelation: "exam_cycles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "evidence_claims_document_id_fkey"
+            columns: ["document_id"]
+            isOneToOne: false
+            referencedRelation: "documents"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      exam_cycles: {
+        Row: {
+          advertisement_number: string | null
+          computer_teacher_evidence_url: string | null
+          computer_teacher_status: string
+          created_at: string
+          display_order: number
+          exam_date: string | null
+          exam_id: string
+          exam_year: number | null
+          id: string
+          label: string
+          notes: string | null
+          pgt_cs_evidence_url: string | null
+          pgt_cs_status: string
+          recruitment_cycle: number | null
+          updated_at: string
+        }
+        Insert: {
+          advertisement_number?: string | null
+          computer_teacher_evidence_url?: string | null
+          computer_teacher_status?: string
+          created_at?: string
+          display_order?: number
+          exam_date?: string | null
+          exam_id: string
+          exam_year?: number | null
+          id?: string
+          label: string
+          notes?: string | null
+          pgt_cs_evidence_url?: string | null
+          pgt_cs_status?: string
+          recruitment_cycle?: number | null
+          updated_at?: string
+        }
+        Update: {
+          advertisement_number?: string | null
+          computer_teacher_evidence_url?: string | null
+          computer_teacher_status?: string
+          created_at?: string
+          display_order?: number
+          exam_date?: string | null
+          exam_id?: string
+          exam_year?: number | null
+          id?: string
+          label?: string
+          notes?: string | null
+          pgt_cs_evidence_url?: string | null
+          pgt_cs_status?: string
+          recruitment_cycle?: number | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "exam_cycles_exam_id_fkey"
+            columns: ["exam_id"]
+            isOneToOne: false
+            referencedRelation: "exams"
             referencedColumns: ["id"]
           },
         ]
@@ -700,6 +909,76 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      gold_corpus: {
+        Row: {
+          artifact_type: string
+          candidate_id: string | null
+          created_at: string
+          cycle_id: string | null
+          document_id: string | null
+          id: string
+          post_type: string
+          quality_level: string
+          reason: string | null
+          title: string | null
+          updated_at: string
+          url: string
+          verified: boolean
+        }
+        Insert: {
+          artifact_type: string
+          candidate_id?: string | null
+          created_at?: string
+          cycle_id?: string | null
+          document_id?: string | null
+          id?: string
+          post_type: string
+          quality_level: string
+          reason?: string | null
+          title?: string | null
+          updated_at?: string
+          url: string
+          verified?: boolean
+        }
+        Update: {
+          artifact_type?: string
+          candidate_id?: string | null
+          created_at?: string
+          cycle_id?: string | null
+          document_id?: string | null
+          id?: string
+          post_type?: string
+          quality_level?: string
+          reason?: string | null
+          title?: string | null
+          updated_at?: string
+          url?: string
+          verified?: boolean
+        }
+        Relationships: [
+          {
+            foreignKeyName: "gold_corpus_candidate_id_fkey"
+            columns: ["candidate_id"]
+            isOneToOne: false
+            referencedRelation: "discovery_candidates"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "gold_corpus_cycle_id_fkey"
+            columns: ["cycle_id"]
+            isOneToOne: false
+            referencedRelation: "exam_cycles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "gold_corpus_document_id_fkey"
+            columns: ["document_id"]
+            isOneToOne: false
+            referencedRelation: "documents"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       profiles: {
         Row: {
