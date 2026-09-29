@@ -336,7 +336,7 @@ def process(vs, cycles, exam_id):
 
         # 2. transcript
         segs, lang = None, None
-        cache = os.path.join(os.environ.get("VPYQ_CACHE", "/tmp/vpyq_cache"), f"{vs['video_id']}.transcript.json")
+        cache = os.path.join(os.environ.get("VPYQ_CACHE", "/tmp/vtranscripts"), f"{vs['video_id']}.transcript.json")
         os.makedirs(os.path.dirname(cache), exist_ok=True)
         try:
             segs, lang = fetch_captions(url, work, info)
@@ -372,6 +372,10 @@ def process(vs, cycles, exam_id):
             tr = window(segs, t - 10, min(nxt, t + 90))
             try:
                 lay = layout(fp, lines, tr)
+                if isinstance(lay, list):  # model occasionally returns a bare array of questions
+                    lay = {"questions": lay}
+                if not isinstance(lay, dict):
+                    raise ValueError(f"unexpected layout JSON type {type(lay).__name__}")
             except Exception as e:
                 step("layout_failed", t=t, error=str(e)[:200]); continue
             if lay.get("exam_header"):
@@ -379,15 +383,17 @@ def process(vs, cycles, exam_id):
             ocr_all = "\n".join(x for x, _ in lines)
             ocr_mean = sum(s for _, s in lines) / len(lines) if lines else 0
             for q in lay.get("questions") or []:
-                if not (q.get("text") or "").strip():
+                if not isinstance(q, dict) or not (q.get("text") or "").strip():
                     continue
                 raw.append({"t": t, "t_end": nxt, "q": q, "ocr_lines": lines, "ocr_all": ocr_all, "ocr_mean": ocr_mean,
-                            "agree": contained(q["text"] + " " + " ".join(o.get("text", "") for o in q.get("options") or []), ocr_all),
+                            "agree": contained(q["text"] + " " + " ".join(str(o.get("text", "")) for o in q.get("options") or [] if isinstance(o, dict)), ocr_all),
                             "tr": tr})
         step("layout", observations=len(raw))
 
         # 5. video-level classification + year model
         vc = classify_video(info, segs, headers)
+        if isinstance(vc, list):
+            vc = vc[0] if vc and isinstance(vc[0], dict) else {}
         cyc, conf, ev = resolve_cycle(pub, vc.get("claimed_exam_year"), cycles, headers)
         db("PATCH", f"video_sources?id=eq.{vs['id']}", {
             "claimed_exam_year": vc.get("claimed_exam_year"), "claimed_exam_year_evidence": vc.get("claimed_exam_year_evidence"),
@@ -414,7 +420,7 @@ def process(vs, cycles, exam_id):
         n = 0
         for g in groups:
             b, q = g["best"], g["best"]["q"]
-            opts = [o for o in q.get("options") or [] if (o.get("text") or "").strip()]
+            opts = [o for o in q.get("options") or [] if isinstance(o, dict) and (o.get("text") or "").strip()]
             vis = next((x["q"].get("visual_answer_label") for x in g["obs"] if x["q"].get("visual_answer_label")), None)
             vis_basis = next((x["q"].get("visual_answer_basis") for x in g["obs"] if x["q"].get("visual_answer_label")), None)
             spk = next((x["q"] for x in g["obs"] if x["q"].get("spoken_answer_label") and x["q"].get("spoken_answer_quote")), None)
@@ -484,7 +490,8 @@ def process(vs, cycles, exam_id):
         db("PATCH", f"video_sources?id=eq.{vs['id']}", {"processing_status": "processed"})
         step("done", candidates=n)
     except Exception as e:
-        log("FAILED", vs["video_id"], e)
+        import traceback
+        log("FAILED", vs["video_id"], e, traceback.format_exc()[-800:])
         db("PATCH", f"video_processing_runs?id=eq.{run_row['id']}", {"status": "failed", "error": str(e)[:1000], "finished_at": datetime.now(timezone.utc).isoformat()})
         db("PATCH", f"video_sources?id=eq.{vs['id']}", {"processing_status": "failed"})
     finally:
