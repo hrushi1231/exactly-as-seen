@@ -281,8 +281,11 @@ def classify_video(info, segs, headers):
     ])
 
 
-def resolve_cycle(publish: datetime | None, claimed_year, cycles, headers):
+def resolve_cycle(publish: datetime | None, claimed_year, cycles, headers, title=""):
     """Returns (cycle_id, confidence, evidence). Never assigns a cycle whose exam is after the upload."""
+    title_years = sorted({int(y) for y in re.findall(r"\b(20[12]\d)\b", title or "")})
+    if claimed_year and title_years and claimed_year not in title_years:
+        return None, "low", f"Conflicting years: title says {', '.join(map(str, title_years))}, speech/description says {claimed_year}. Not assigned."
     hdr_dates = []
     for h in headers:
         for d, m, y in re.findall(r"\b(\d{1,2})[/.-](\d{1,2})[/.-](20\d\d)\b", h):
@@ -394,7 +397,7 @@ def process(vs, cycles, exam_id):
         vc = classify_video(info, segs, headers)
         if isinstance(vc, list):
             vc = vc[0] if vc and isinstance(vc[0], dict) else {}
-        cyc, conf, ev = resolve_cycle(pub, vc.get("claimed_exam_year"), cycles, headers)
+        cyc, conf, ev = resolve_cycle(pub, vc.get("claimed_exam_year"), cycles, headers, info.get("title") or "")
         db("PATCH", f"video_sources?id=eq.{vs['id']}", {
             "claimed_exam_year": vc.get("claimed_exam_year"), "claimed_exam_year_evidence": vc.get("claimed_exam_year_evidence"),
             "resolved_cycle_id": cyc, "exam_year_confidence": conf, "exam_year_evidence": ev,
