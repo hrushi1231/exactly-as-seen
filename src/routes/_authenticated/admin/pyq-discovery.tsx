@@ -7,7 +7,7 @@ import { ExternalLink } from "lucide-react";
 import { AppShell } from "@/components/app-shell";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
-import { runCycleDiscovery, sendCandidatesToCollector } from "@/lib/discovery.functions";
+import { refreshCycleStats, runCycleDiscovery, sendCandidatesToCollector } from "@/lib/discovery.functions";
 import { downloadDocument } from "@/lib/collector.functions";
 import { AUTHORITY_LABEL, AUTHORITY_LEVELS, selectClass } from "@/lib/documents";
 import type { Database } from "@/integrations/supabase/types";
@@ -46,6 +46,7 @@ function DiscoveryPage() {
   const qc = useQueryClient();
   const run = useServerFn(runCycleDiscovery);
   const send = useServerFn(sendCandidatesToCollector);
+  const restat = useServerFn(refreshCycleStats);
   const download = useServerFn(downloadDocument);
   const [year, setYear] = useState<number | null>(null);
   const [busy, setBusy] = useState<string | null>(null);
@@ -100,6 +101,7 @@ function DiscoveryPage() {
   async function update(id: string, patch: Partial<Cand>) {
     const { error } = await supabase.from("discovery_candidates").update(patch).eq("id", id);
     if (error) toast.error(error.message);
+    for (const c of yearCycles) await restat({ data: { cycleId: c.id } });
     await refresh();
   }
 
@@ -119,6 +121,7 @@ function DiscoveryPage() {
         const r = await download({ data: { documentId: o.documentId } });
         if (r.status !== "failed") ok++;
       }
+      for (const c of yearCycles) await restat({ data: { cycleId: c.id } });
       toast.success(`${out.length} registered as documents; ${ok} files downloaded.`);
       setPicked(new Set());
     } catch (e) {
