@@ -20,6 +20,8 @@ import { Route as AuthenticatedPyqRouteImport } from './routes/_authenticated/py
 import { Route as AuthenticatedRevisionRouteImport } from './routes/_authenticated/revision'
 import { Route as AuthenticatedRoadmapRouteImport } from './routes/_authenticated/roadmap'
 import { Route as AuthenticatedTodayRouteImport } from './routes/_authenticated/today'
+import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin/index'
+import { Route as AuthenticatedAdminSourcesRouteImport } from './routes/_authenticated/admin/sources'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -75,11 +77,22 @@ const AuthenticatedTodayRoute = AuthenticatedTodayRouteImport.update({
   path: '/today',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthenticatedAdminRouteRoute,
+} as any)
+const AuthenticatedAdminSourcesRoute =
+  AuthenticatedAdminSourcesRouteImport.update({
+    id: '/sources',
+    path: '/sources',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
-  '/admin': typeof AuthenticatedAdminRouteRoute
+  '/admin': typeof AuthenticatedAdminRouteRouteWithChildren
   '/analytics': typeof AuthenticatedAnalyticsRoute
   '/learn': typeof AuthenticatedLearnRoute
   '/mocks': typeof AuthenticatedMocksRoute
@@ -87,11 +100,12 @@ export interface FileRoutesByFullPath {
   '/revision': typeof AuthenticatedRevisionRoute
   '/roadmap': typeof AuthenticatedRoadmapRoute
   '/today': typeof AuthenticatedTodayRoute
+  '/admin/sources': typeof AuthenticatedAdminSourcesRoute
+  '/admin/': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
-  '/admin': typeof AuthenticatedAdminRouteRoute
   '/analytics': typeof AuthenticatedAnalyticsRoute
   '/learn': typeof AuthenticatedLearnRoute
   '/mocks': typeof AuthenticatedMocksRoute
@@ -99,13 +113,15 @@ export interface FileRoutesByTo {
   '/revision': typeof AuthenticatedRevisionRoute
   '/roadmap': typeof AuthenticatedRoadmapRoute
   '/today': typeof AuthenticatedTodayRoute
+  '/admin/sources': typeof AuthenticatedAdminSourcesRoute
+  '/admin': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
-  '/_authenticated/admin': typeof AuthenticatedAdminRouteRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRouteRouteWithChildren
   '/_authenticated/analytics': typeof AuthenticatedAnalyticsRoute
   '/_authenticated/learn': typeof AuthenticatedLearnRoute
   '/_authenticated/mocks': typeof AuthenticatedMocksRoute
@@ -113,6 +129,8 @@ export interface FileRoutesById {
   '/_authenticated/revision': typeof AuthenticatedRevisionRoute
   '/_authenticated/roadmap': typeof AuthenticatedRoadmapRoute
   '/_authenticated/today': typeof AuthenticatedTodayRoute
+  '/_authenticated/admin/sources': typeof AuthenticatedAdminSourcesRoute
+  '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -127,11 +145,12 @@ export interface FileRouteTypes {
     | '/revision'
     | '/roadmap'
     | '/today'
+    | '/admin/sources'
+    | '/admin/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/auth'
-    | '/admin'
     | '/analytics'
     | '/learn'
     | '/mocks'
@@ -139,6 +158,8 @@ export interface FileRouteTypes {
     | '/revision'
     | '/roadmap'
     | '/today'
+    | '/admin/sources'
+    | '/admin'
   id:
     | '__root__'
     | '/'
@@ -152,6 +173,8 @@ export interface FileRouteTypes {
     | '/_authenticated/revision'
     | '/_authenticated/roadmap'
     | '/_authenticated/today'
+    | '/_authenticated/admin/sources'
+    | '/_authenticated/admin/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -239,11 +262,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedTodayRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/admin/': {
+      id: '/_authenticated/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/sources': {
+      id: '/_authenticated/admin/sources'
+      path: '/sources'
+      fullPath: '/admin/sources'
+      preLoaderRoute: typeof AuthenticatedAdminSourcesRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
   }
 }
 
+interface AuthenticatedAdminRouteRouteChildren {
+  AuthenticatedAdminSourcesRoute: typeof AuthenticatedAdminSourcesRoute
+  AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
+}
+
+const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren =
+  {
+    AuthenticatedAdminSourcesRoute: AuthenticatedAdminSourcesRoute,
+    AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
+  }
+
+const AuthenticatedAdminRouteRouteWithChildren =
+  AuthenticatedAdminRouteRoute._addFileChildren(
+    AuthenticatedAdminRouteRouteChildren,
+  )
+
 interface AuthenticatedRouteRouteChildren {
-  AuthenticatedAdminRouteRoute: typeof AuthenticatedAdminRouteRoute
+  AuthenticatedAdminRouteRoute: typeof AuthenticatedAdminRouteRouteWithChildren
   AuthenticatedAnalyticsRoute: typeof AuthenticatedAnalyticsRoute
   AuthenticatedLearnRoute: typeof AuthenticatedLearnRoute
   AuthenticatedMocksRoute: typeof AuthenticatedMocksRoute
@@ -254,7 +307,7 @@ interface AuthenticatedRouteRouteChildren {
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
-  AuthenticatedAdminRouteRoute: AuthenticatedAdminRouteRoute,
+  AuthenticatedAdminRouteRoute: AuthenticatedAdminRouteRouteWithChildren,
   AuthenticatedAnalyticsRoute: AuthenticatedAnalyticsRoute,
   AuthenticatedLearnRoute: AuthenticatedLearnRoute,
   AuthenticatedMocksRoute: AuthenticatedMocksRoute,
