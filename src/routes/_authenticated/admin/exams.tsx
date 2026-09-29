@@ -61,6 +61,17 @@ function ExamsAdmin() {
   const [deleting, setDeleting] = useState<Exam | null>(null);
 
   const exams = useQuery({ queryKey: ["exams"], queryFn: fetchExams });
+  const patterns = useQuery({
+    queryKey: ["exam_patterns"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("exam_patterns")
+        .select("id, exam_id, version, recruitment_cycle, is_current, total_questions, total_marks, duration_minutes, marks_per_correct, negative_marking, sections")
+        .order("created_at");
+      if (error) throw new Error(error.message);
+      return data ?? [];
+    },
+  });
   const invalidate = () => queryClient.invalidateQueries({ queryKey: ["exams"] });
 
   const save = useMutation({
@@ -232,6 +243,43 @@ function ExamsAdmin() {
             )}
           </tbody>
         </table>
+      </div>
+
+      <h2 className="mb-2 mt-8 text-sm font-semibold">Exam patterns</h2>
+      <div className="overflow-hidden rounded-md border border-border bg-card">
+        {(patterns.data ?? []).length === 0 && (
+          <p className="px-4 py-6 text-sm text-muted-foreground">
+            {patterns.isLoading ? "Loading patterns…" : "No exam patterns recorded."}
+          </p>
+        )}
+        {(patterns.data ?? []).map((p) => {
+          const exam = exams.data?.find((e) => e.id === p.exam_id);
+          const sections = Array.isArray(p.sections) ? (p.sections as Array<{ name?: string; questions?: number }>) : [];
+          return (
+            <div key={p.id} className="border-b border-border px-4 py-3 text-sm last:border-b-0">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="font-medium">{exam?.name ?? "Unknown exam"}</span>
+                <span className="rounded border border-border px-1.5 py-0.5 font-mono text-xs">{p.version}</span>
+                {p.is_current && (
+                  <span className="rounded border border-primary/30 bg-primary/10 px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wide text-primary">
+                    Current
+                  </span>
+                )}
+                {p.recruitment_cycle && <span className="text-xs text-muted-foreground">{p.recruitment_cycle}</span>}
+              </div>
+              <div className="mt-1 text-xs text-muted-foreground">
+                {p.total_questions ?? "—"} questions · {p.total_marks ?? "—"} marks · {p.duration_minutes ?? "—"} min
+                {p.marks_per_correct != null && ` · +${p.marks_per_correct} correct`}
+                {p.negative_marking != null && ` · −${p.negative_marking} wrong`}
+              </div>
+              {sections.length > 0 && (
+                <div className="mt-1 text-xs text-muted-foreground">
+                  {sections.map((sec) => `${sec.name ?? "Section"} ${sec.questions ?? ""}`.trim()).join(" · ")}
+                </div>
+              )}
+            </div>
+          );
+        })}
       </div>
 
       <Dialog open={Boolean(draft)} onOpenChange={(open) => !open && setDraft(null)}>

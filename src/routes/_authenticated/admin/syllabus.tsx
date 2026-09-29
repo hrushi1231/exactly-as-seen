@@ -186,7 +186,16 @@ function SyllabusAdmin() {
         if (error) throw new Error(error.message);
       }
     },
-    onSuccess: refresh,
+    onMutate: (input) => {
+      const key = [TABLES[input.type]];
+      const order = new Map(input.rows.map((r) => [r.id, r.display_order]));
+      queryClient.setQueryData(key, (old: Array<{ id: string; display_order: number }> | undefined) =>
+        old
+          ?.map((row) => (order.has(row.id) ? { ...row, display_order: order.get(row.id)! } : row))
+          .sort((a, b) => a.display_order - b.display_order),
+      );
+    },
+    onSettled: refresh,
     onError: (error: Error) => toast.error(error.message),
   });
 
@@ -266,18 +275,37 @@ function SyllabusAdmin() {
     .filter(
       ({ subject, topics: entries }) =>
         entries.length > 0 ||
-        ((matches(subject.name) || !term) &&
+        (statusFilter === "all" &&
+          (matches(subject.name) || !term) &&
           (examFilter === "all" || passesExam("subject", subject.id))),
     );
 
   function exportJson() {
+    const src = (sources.data ?? [])[0];
     const data = {
+      source: src
+        ? {
+            source_title: src.source_title,
+            source_url: src.source_url,
+            source_document_version: src.source_document_version,
+            source_recruitment_context: src.source_recruitment_context,
+            source_page_start: src.source_page_start,
+            source_page_end: src.source_page_end,
+            source_type: src.source_type,
+            is_verified: src.is_verified,
+            notes: src.notes,
+          }
+        : undefined,
       subjects: (subjects.data ?? []).map((subject) => ({
         name: subject.name,
         slug: subject.slug,
         description: subject.description,
         display_order: subject.display_order,
         status: subject.status,
+        source_text: subject.source_text,
+        original_syllabus_wording: subject.original_syllabus_wording,
+        source_page: subject.source_page,
+        verification_status: subject.verification_status,
         exams: (exams.data ?? []).filter((e) => isMapped(e.id, "subject", subject.id)).map((e) => e.slug),
         topics: (topics.data ?? [])
           .filter((t) => t.subject_id === subject.id)
@@ -289,6 +317,10 @@ function SyllabusAdmin() {
             display_order: topic.display_order,
             estimated_minutes: topic.estimated_minutes,
             status: topic.status,
+            original_syllabus_wording: topic.original_syllabus_wording,
+            source_page: topic.source_page,
+            source_page_end: topic.source_page_end,
+            verification_status: topic.verification_status,
             exams: (exams.data ?? [])
               .filter((e) => isMapped(e.id, "topic", topic.id))
               .map((e) => e.slug),
@@ -302,6 +334,9 @@ function SyllabusAdmin() {
                 display_order: sub.display_order,
                 estimated_minutes: sub.estimated_minutes,
                 status: sub.status,
+                original_syllabus_wording: sub.original_syllabus_wording,
+                source_page: sub.source_page,
+                verification_status: sub.verification_status,
                 exams: (exams.data ?? [])
                   .filter((e) => isMapped(e.id, "subtopic", sub.id))
                   .map((e) => e.slug),
@@ -376,6 +411,7 @@ function SyllabusAdmin() {
   const sources = useQuery({ queryKey: ["sources"], queryFn: fetchSources });
 
   function move(type: EntityType, list: Array<{ id: string }>, index: number, delta: number) {
+    if (reorder.isPending) return;
     const next = index + delta;
     if (next < 0 || next >= list.length) return;
     const ordered = [...list];
