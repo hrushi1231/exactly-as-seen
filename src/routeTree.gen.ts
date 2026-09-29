@@ -21,6 +21,7 @@ import { Route as AuthenticatedRevisionRouteImport } from './routes/_authenticat
 import { Route as AuthenticatedRoadmapRouteImport } from './routes/_authenticated/roadmap'
 import { Route as AuthenticatedTodayRouteImport } from './routes/_authenticated/today'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin/index'
+import { Route as AuthenticatedAdminExamsRouteImport } from './routes/_authenticated/admin/exams'
 import { Route as AuthenticatedAdminSourcesRouteImport } from './routes/_authenticated/admin/sources'
 
 const IndexRoute = IndexRouteImport.update({
@@ -82,6 +83,11 @@ const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AuthenticatedAdminRouteRoute,
 } as any)
+const AuthenticatedAdminExamsRoute = AuthenticatedAdminExamsRouteImport.update({
+  id: '/exams',
+  path: '/exams',
+  getParentRoute: () => AuthenticatedAdminRouteRoute,
+} as any)
 const AuthenticatedAdminSourcesRoute =
   AuthenticatedAdminSourcesRouteImport.update({
     id: '/sources',
@@ -100,6 +106,7 @@ export interface FileRoutesByFullPath {
   '/revision': typeof AuthenticatedRevisionRoute
   '/roadmap': typeof AuthenticatedRoadmapRoute
   '/today': typeof AuthenticatedTodayRoute
+  '/admin/exams': typeof AuthenticatedAdminExamsRoute
   '/admin/sources': typeof AuthenticatedAdminSourcesRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
 }
@@ -113,6 +120,7 @@ export interface FileRoutesByTo {
   '/revision': typeof AuthenticatedRevisionRoute
   '/roadmap': typeof AuthenticatedRoadmapRoute
   '/today': typeof AuthenticatedTodayRoute
+  '/admin/exams': typeof AuthenticatedAdminExamsRoute
   '/admin/sources': typeof AuthenticatedAdminSourcesRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
 }
@@ -129,6 +137,7 @@ export interface FileRoutesById {
   '/_authenticated/revision': typeof AuthenticatedRevisionRoute
   '/_authenticated/roadmap': typeof AuthenticatedRoadmapRoute
   '/_authenticated/today': typeof AuthenticatedTodayRoute
+  '/_authenticated/admin/exams': typeof AuthenticatedAdminExamsRoute
   '/_authenticated/admin/sources': typeof AuthenticatedAdminSourcesRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
 }
@@ -145,6 +154,7 @@ export interface FileRouteTypes {
     | '/revision'
     | '/roadmap'
     | '/today'
+    | '/admin/exams'
     | '/admin/sources'
     | '/admin/'
   fileRoutesByTo: FileRoutesByTo
@@ -158,6 +168,7 @@ export interface FileRouteTypes {
     | '/revision'
     | '/roadmap'
     | '/today'
+    | '/admin/exams'
     | '/admin/sources'
     | '/admin'
   id:
@@ -173,6 +184,7 @@ export interface FileRouteTypes {
     | '/_authenticated/revision'
     | '/_authenticated/roadmap'
     | '/_authenticated/today'
+    | '/_authenticated/admin/exams'
     | '/_authenticated/admin/sources'
     | '/_authenticated/admin/'
   fileRoutesById: FileRoutesById
@@ -269,6 +281,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
+    '/_authenticated/admin/exams': {
+      id: '/_authenticated/admin/exams'
+      path: '/exams'
+      fullPath: '/admin/exams'
+      preLoaderRoute: typeof AuthenticatedAdminExamsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
     '/_authenticated/admin/sources': {
       id: '/_authenticated/admin/sources'
       path: '/sources'
@@ -280,12 +299,14 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedAdminRouteRouteChildren {
+  AuthenticatedAdminExamsRoute: typeof AuthenticatedAdminExamsRoute
   AuthenticatedAdminSourcesRoute: typeof AuthenticatedAdminSourcesRoute
   AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
 }
 
 const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren =
   {
+    AuthenticatedAdminExamsRoute: AuthenticatedAdminExamsRoute,
     AuthenticatedAdminSourcesRoute: AuthenticatedAdminSourcesRoute,
     AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
   }
