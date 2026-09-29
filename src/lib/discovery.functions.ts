@@ -30,11 +30,15 @@ async function recomputeCycle(supabase: DB, cycleId: string, post: PostType, yea
     .neq("status", "ignored");
   const all = cands ?? [];
   const match = all.filter((c) => c.year_guess === year && (c.post_type_guess === post || c.post_type_guess === "unknown"));
-  const has = (t: string) => match.some((c) => c.artifact_type_guess === t);
+  // Paper/key/sheet flags need an admin-approved lead; unreviewed search hits are
+  // often generic listing pages, so they only count as "exam held" evidence.
+  const confirmed = match.filter((c) => c.status === "approved" || c.status === "sent");
+  const has = (t: string) => confirmed.some((c) => c.artifact_type_guess === t);
+  const mentions = (t: string) => match.some((c) => c.artifact_type_guess === t);
   const paper = has("question_paper");
   const memOnly = !paper && (has("question_video") || has("memory_based_questions") || has("solved_questions"));
-  const held = has("answer_key") || has("response_sheet") || has("result") || has("cutoff") || has("exam_schedule") || has("exam_notice");
-  const evidence = paper ? "paper_found" : memOnly ? "memory_based_only" : held ? "exam_held_paper_not_found" : "no_exam_evidence";
+  const held = ["answer_key", "response_sheet", "result", "cutoff", "exam_schedule", "exam_notice", "question_paper"].some(mentions);
+  const evidence = paper ? "paper_found" : memOnly ? "memory_based_only" : held ? "exam_held_paper_not_found" : match.length ? "unknown" : "no_exam_evidence";
   return {
     candidate_count: all.length,
     official_candidates: all.filter((c) => c.authority_guess === "official").length,
