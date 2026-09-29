@@ -23,6 +23,7 @@ import { Route as AuthenticatedTodayRouteImport } from './routes/_authenticated/
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin/index'
 import { Route as AuthenticatedAdminExamsRouteImport } from './routes/_authenticated/admin/exams'
 import { Route as AuthenticatedAdminSourcesRouteImport } from './routes/_authenticated/admin/sources'
+import { Route as AuthenticatedAdminSyllabusRouteImport } from './routes/_authenticated/admin/syllabus'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -94,6 +95,12 @@ const AuthenticatedAdminSourcesRoute =
     path: '/sources',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
+const AuthenticatedAdminSyllabusRoute =
+  AuthenticatedAdminSyllabusRouteImport.update({
+    id: '/syllabus',
+    path: '/syllabus',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -108,6 +115,7 @@ export interface FileRoutesByFullPath {
   '/today': typeof AuthenticatedTodayRoute
   '/admin/exams': typeof AuthenticatedAdminExamsRoute
   '/admin/sources': typeof AuthenticatedAdminSourcesRoute
+  '/admin/syllabus': typeof AuthenticatedAdminSyllabusRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRoutesByTo {
@@ -122,6 +130,7 @@ export interface FileRoutesByTo {
   '/today': typeof AuthenticatedTodayRoute
   '/admin/exams': typeof AuthenticatedAdminExamsRoute
   '/admin/sources': typeof AuthenticatedAdminSourcesRoute
+  '/admin/syllabus': typeof AuthenticatedAdminSyllabusRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRoutesById {
@@ -139,6 +148,7 @@ export interface FileRoutesById {
   '/_authenticated/today': typeof AuthenticatedTodayRoute
   '/_authenticated/admin/exams': typeof AuthenticatedAdminExamsRoute
   '/_authenticated/admin/sources': typeof AuthenticatedAdminSourcesRoute
+  '/_authenticated/admin/syllabus': typeof AuthenticatedAdminSyllabusRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRouteTypes {
@@ -156,6 +166,7 @@ export interface FileRouteTypes {
     | '/today'
     | '/admin/exams'
     | '/admin/sources'
+    | '/admin/syllabus'
     | '/admin/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -170,6 +181,7 @@ export interface FileRouteTypes {
     | '/today'
     | '/admin/exams'
     | '/admin/sources'
+    | '/admin/syllabus'
     | '/admin'
   id:
     | '__root__'
@@ -186,6 +198,7 @@ export interface FileRouteTypes {
     | '/_authenticated/today'
     | '/_authenticated/admin/exams'
     | '/_authenticated/admin/sources'
+    | '/_authenticated/admin/syllabus'
     | '/_authenticated/admin/'
   fileRoutesById: FileRoutesById
 }
@@ -295,12 +308,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminSourcesRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
+    '/_authenticated/admin/syllabus': {
+      id: '/_authenticated/admin/syllabus'
+      path: '/syllabus'
+      fullPath: '/admin/syllabus'
+      preLoaderRoute: typeof AuthenticatedAdminSyllabusRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
   }
 }
 
 interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminExamsRoute: typeof AuthenticatedAdminExamsRoute
   AuthenticatedAdminSourcesRoute: typeof AuthenticatedAdminSourcesRoute
+  AuthenticatedAdminSyllabusRoute: typeof AuthenticatedAdminSyllabusRoute
   AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
 }
 
@@ -308,6 +329,7 @@ const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren
   {
     AuthenticatedAdminExamsRoute: AuthenticatedAdminExamsRoute,
     AuthenticatedAdminSourcesRoute: AuthenticatedAdminSourcesRoute,
+    AuthenticatedAdminSyllabusRoute: AuthenticatedAdminSyllabusRoute,
     AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
   }
 
