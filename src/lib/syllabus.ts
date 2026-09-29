@@ -65,9 +65,26 @@ export interface Progress {
   entity_type: EntityType;
   entity_id: string;
   status: string;
-  source_id: string | null;
-  source_text: string | null;
 }
+
+export interface SyllabusSource {
+  id: string;
+  source_title: string;
+  source_url: string | null;
+  source_document_version: string | null;
+  source_recruitment_context: string | null;
+  source_page_start: number | null;
+  source_page_end: number | null;
+  source_type: string;
+  is_verified: boolean;
+  notes: string | null;
+}
+
+export const fetchSources = async () => {
+  const { data, error } = await supabase.from("syllabus_sources").select("*").order("created_at");
+  if (error) throw new Error(error.message);
+  return (data ?? []) as unknown as SyllabusSource[];
+};
 
 export function slugify(value: string) {
   return value
