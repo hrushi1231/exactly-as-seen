@@ -4,6 +4,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { ChevronDown, ChevronRight, Check, X } from "lucide-react";
 import { toast } from "sonner";
 import { AppShell } from "@/components/app-shell";
+import { VerificationBadge } from "@/components/verification-badge";
 import { useAuth } from "@/hooks/use-auth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -318,13 +319,17 @@ function DetailPanel({
   const entityId = topic?.id ?? subtopic?.id ?? "";
   const parentTopic = subtopic ? topics.find((t) => t.id === subtopic.topic_id) : topic;
   const subject = subjects.find((s) => s.id === parentTopic?.subject_id);
-  const name = topic?.name ?? subtopic?.name ?? "";
-  const description = topic?.description ?? subtopic?.description ?? null;
-  const status = topic?.status ?? subtopic?.status ?? "active";
-  const sourceText = topic?.source_text ?? subtopic?.source_text ?? null;
-  const source = sources.find((s) => s.id === (topic?.source_id ?? subtopic?.source_id));
+  const node = topic ?? subtopic;
+  const name = node?.name ?? "";
+  const description = node?.description ?? null;
+  const status = node?.status ?? "active";
+  const section = parentTopic?.source_text ?? null;
+  const wording = node?.original_syllabus_wording ?? null;
+  const page = node?.source_page ?? null;
+  const pageEnd = topic?.source_page_end ?? null;
+  const source = sources.find((s) => s.id === node?.source_id);
   const hierarchy = [subject?.name, subtopic ? parentTopic?.name : null].filter(Boolean).join(" › ");
-  const minutes = formatMinutes(topic?.estimated_minutes ?? subtopic?.estimated_minutes);
+  const minutes = formatMinutes(node?.estimated_minutes);
 
   const coverage = exams.map((exam) => ({
     exam,
@@ -355,12 +360,25 @@ function DetailPanel({
         </button>
       </div>
 
+      <div className="mt-2">
+        <VerificationBadge status={node?.verification_status} />
+      </div>
+
       {description && <p className="mt-3 text-sm text-muted-foreground">{description}</p>}
-      {sourceText && (
-        <blockquote className="mt-3 border-l-2 border-border pl-3 text-xs text-muted-foreground">
-          {sourceText}
-        </blockquote>
-      )}
+
+      <div className="mt-4">
+        <div className="text-[11px] uppercase tracking-wider text-muted-foreground">
+          Official syllabus wording
+        </div>
+        {wording ? (
+          <blockquote className="mt-1.5 border-l-2 border-primary/40 pl-3 text-xs leading-relaxed">
+            {wording}
+          </blockquote>
+        ) : (
+          <p className="mt-1.5 text-xs text-muted-foreground">Not recorded.</p>
+        )}
+        {section && <p className="mt-1.5 text-[11px] text-muted-foreground">{section}</p>}
+      </div>
 
       <dl className="mt-4 space-y-2 text-sm">
         <div className="flex justify-between gap-4">
@@ -379,9 +397,10 @@ function DetailPanel({
           <dt className="text-muted-foreground">Document version</dt>
           <dd>{source?.source_document_version ?? "—"}</dd>
         </div>
-        {source && !source.is_verified && (
-          <p className="text-xs text-muted-foreground">Wording not yet verified against the source PDF.</p>
-        )}
+        <div className="flex justify-between gap-4">
+          <dt className="text-muted-foreground">Source page</dt>
+          <dd>{page ? (pageEnd && pageEnd !== page ? `pp. ${page}–${pageEnd}` : `p. ${page}`) : "—"}</dd>
+        </div>
         {minutes && (
           <div className="flex justify-between gap-4">
             <dt className="text-muted-foreground">Estimated study time</dt>
