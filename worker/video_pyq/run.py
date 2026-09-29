@@ -283,7 +283,11 @@ def classify_video(info, segs, headers):
 
 def resolve_cycle(publish: datetime | None, claimed_year, cycles, headers, title=""):
     """Returns (cycle_id, confidence, evidence). Never assigns a cycle whose exam is after the upload."""
-    title_years = sorted({int(y) for y in re.findall(r"\b(20[12]\d)\b", title or "")})
+    # Only title years that could be a *past* paper at upload time count (a title naming an upcoming exam is a target, not a source).
+    def past(y):
+        c = next((c for c in cycles if y in (c["exam_year"], c["recruitment_cycle"]) and c["exam_start_date"]), None)
+        return bool(c and publish and datetime.fromisoformat(c["exam_start_date"]).date() <= publish.date())
+    title_years = sorted({int(y) for y in re.findall(r"\b(20[12]\d)\b", title or "") if past(int(y))})
     if claimed_year and title_years and claimed_year not in title_years:
         return None, "low", f"Conflicting years: title says {', '.join(map(str, title_years))}, speech/description says {claimed_year}. Not assigned."
     hdr_dates = []
