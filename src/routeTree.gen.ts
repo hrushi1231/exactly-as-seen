@@ -15,6 +15,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedLearnRouteImport } from './routes/_authenticated/learn'
 import { Route as AuthenticatedMocksRouteImport } from './routes/_authenticated/mocks'
 import { Route as AuthenticatedPyqRouteImport } from './routes/_authenticated/pyq'
+import { Route as AuthenticatedRevisionRouteImport } from './routes/_authenticated/revision'
 import { Route as AuthenticatedRoadmapRouteImport } from './routes/_authenticated/roadmap'
 import { Route as AuthenticatedTodayRouteImport } from './routes/_authenticated/today'
 
@@ -47,6 +48,11 @@ const AuthenticatedPyqRoute = AuthenticatedPyqRouteImport.update({
   path: '/pyq',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedRevisionRoute = AuthenticatedRevisionRouteImport.update({
+  id: '/revision',
+  path: '/revision',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedRoadmapRoute = AuthenticatedRoadmapRouteImport.update({
   id: '/roadmap',
   path: '/roadmap',
@@ -64,6 +70,7 @@ export interface FileRoutesByFullPath {
   '/learn': typeof AuthenticatedLearnRoute
   '/mocks': typeof AuthenticatedMocksRoute
   '/pyq': typeof AuthenticatedPyqRoute
+  '/revision': typeof AuthenticatedRevisionRoute
   '/roadmap': typeof AuthenticatedRoadmapRoute
   '/today': typeof AuthenticatedTodayRoute
 }
@@ -73,6 +80,7 @@ export interface FileRoutesByTo {
   '/learn': typeof AuthenticatedLearnRoute
   '/mocks': typeof AuthenticatedMocksRoute
   '/pyq': typeof AuthenticatedPyqRoute
+  '/revision': typeof AuthenticatedRevisionRoute
   '/roadmap': typeof AuthenticatedRoadmapRoute
   '/today': typeof AuthenticatedTodayRoute
 }
@@ -84,15 +92,31 @@ export interface FileRoutesById {
   '/_authenticated/learn': typeof AuthenticatedLearnRoute
   '/_authenticated/mocks': typeof AuthenticatedMocksRoute
   '/_authenticated/pyq': typeof AuthenticatedPyqRoute
+  '/_authenticated/revision': typeof AuthenticatedRevisionRoute
   '/_authenticated/roadmap': typeof AuthenticatedRoadmapRoute
   '/_authenticated/today': typeof AuthenticatedTodayRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/auth' | '/learn' | '/mocks' | '/pyq' | '/roadmap' | '/today'
+    | '/'
+    | '/auth'
+    | '/learn'
+    | '/mocks'
+    | '/pyq'
+    | '/revision'
+    | '/roadmap'
+    | '/today'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/learn' | '/mocks' | '/pyq' | '/roadmap' | '/today'
+  to:
+    | '/'
+    | '/auth'
+    | '/learn'
+    | '/mocks'
+    | '/pyq'
+    | '/revision'
+    | '/roadmap'
+    | '/today'
   id:
     | '__root__'
     | '/'
@@ -101,6 +125,7 @@ export interface FileRouteTypes {
     | '/_authenticated/learn'
     | '/_authenticated/mocks'
     | '/_authenticated/pyq'
+    | '/_authenticated/revision'
     | '/_authenticated/roadmap'
     | '/_authenticated/today'
   fileRoutesById: FileRoutesById
@@ -155,6 +180,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPyqRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/revision': {
+      id: '/_authenticated/revision'
+      path: '/revision'
+      fullPath: '/revision'
+      preLoaderRoute: typeof AuthenticatedRevisionRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/roadmap': {
       id: '/_authenticated/roadmap'
       path: '/roadmap'
@@ -176,6 +208,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedLearnRoute: typeof AuthenticatedLearnRoute
   AuthenticatedMocksRoute: typeof AuthenticatedMocksRoute
   AuthenticatedPyqRoute: typeof AuthenticatedPyqRoute
+  AuthenticatedRevisionRoute: typeof AuthenticatedRevisionRoute
   AuthenticatedRoadmapRoute: typeof AuthenticatedRoadmapRoute
   AuthenticatedTodayRoute: typeof AuthenticatedTodayRoute
 }
@@ -184,6 +217,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedLearnRoute: AuthenticatedLearnRoute,
   AuthenticatedMocksRoute: AuthenticatedMocksRoute,
   AuthenticatedPyqRoute: AuthenticatedPyqRoute,
+  AuthenticatedRevisionRoute: AuthenticatedRevisionRoute,
   AuthenticatedRoadmapRoute: AuthenticatedRoadmapRoute,
   AuthenticatedTodayRoute: AuthenticatedTodayRoute,
 }
