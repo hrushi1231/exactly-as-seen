@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
   fetchExams,
+  fetchSources,
   fetchMappings,
   fetchProgress,
   fetchSubjects,
@@ -19,6 +20,7 @@ import {
   type EntityType,
   type Exam,
   type Subject,
+  type SyllabusSource,
   type Subtopic,
   type Topic,
 } from "@/lib/syllabus";
@@ -55,6 +57,7 @@ function RoadmapPage() {
   const topics = useQuery({ queryKey: ["topics"], queryFn: fetchTopics });
   const subtopics = useQuery({ queryKey: ["subtopics"], queryFn: fetchSubtopics });
   const mappings = useQuery({ queryKey: ["mappings"], queryFn: fetchMappings });
+  const sources = useQuery({ queryKey: ["sources"], queryFn: fetchSources });
   const progress = useQuery({
     queryKey: ["progress", userId],
     queryFn: () => fetchProgress(userId!),
@@ -280,6 +283,8 @@ function RoadmapPage() {
             topics={topics.data ?? []}
             exams={exams.data ?? []}
             mappings={mappings.data ?? []}
+            sources={sources.data ?? []}
+            isCompleted={completed.has(`${selected.type}:${selected.id}`)}
             onClose={() => setSelected(null)}
           />
         )}
@@ -295,6 +300,8 @@ function DetailPanel({
   topics,
   exams,
   mappings,
+  sources,
+  isCompleted,
   onClose,
 }: {
   topic?: Topic | undefined;
@@ -303,6 +310,8 @@ function DetailPanel({
   topics: Topic[];
   exams: Exam[];
   mappings: Array<{ exam_id: string; entity_type: EntityType; entity_id: string; is_included: boolean }>;
+  sources: SyllabusSource[];
+  isCompleted: boolean;
   onClose: () => void;
 }) {
   const entityType: EntityType = topic ? "topic" : "subtopic";
@@ -312,6 +321,9 @@ function DetailPanel({
   const name = topic?.name ?? subtopic?.name ?? "";
   const description = topic?.description ?? subtopic?.description ?? null;
   const status = topic?.status ?? subtopic?.status ?? "active";
+  const sourceText = topic?.source_text ?? subtopic?.source_text ?? null;
+  const source = sources.find((s) => s.id === (topic?.source_id ?? subtopic?.source_id));
+  const hierarchy = [subject?.name, subtopic ? parentTopic?.name : null].filter(Boolean).join(" › ");
   const minutes = formatMinutes(topic?.estimated_minutes ?? subtopic?.estimated_minutes);
 
   const coverage = exams.map((exam) => ({
@@ -330,7 +342,7 @@ function DetailPanel({
       <div className="flex items-start justify-between gap-2">
         <div>
           <div className="text-[11px] uppercase tracking-wider text-muted-foreground">
-            {subject?.name ?? "Syllabus"}
+            {hierarchy || "Syllabus"}
           </div>
           <h2 className="mt-0.5 text-sm font-semibold">{name}</h2>
         </div>
@@ -344,16 +356,38 @@ function DetailPanel({
       </div>
 
       {description && <p className="mt-3 text-sm text-muted-foreground">{description}</p>}
+      {sourceText && (
+        <blockquote className="mt-3 border-l-2 border-border pl-3 text-xs text-muted-foreground">
+          {sourceText}
+        </blockquote>
+      )}
 
       <dl className="mt-4 space-y-2 text-sm">
         <div className="flex justify-between gap-4">
-          <dt className="text-muted-foreground">Status</dt>
+          <dt className="text-muted-foreground">Completion</dt>
+          <dd>{isCompleted ? "Completed" : "Not started"}</dd>
+        </div>
+        <div className="flex justify-between gap-4">
+          <dt className="text-muted-foreground">Record status</dt>
           <dd className="capitalize">{status}</dd>
         </div>
         <div className="flex justify-between gap-4">
-          <dt className="text-muted-foreground">Estimated study time</dt>
-          <dd>{minutes ?? "Not set"}</dd>
+          <dt className="text-muted-foreground">Source</dt>
+          <dd className="text-right">{source?.source_title ?? "Not recorded"}</dd>
         </div>
+        <div className="flex justify-between gap-4">
+          <dt className="text-muted-foreground">Document version</dt>
+          <dd>{source?.source_document_version ?? "—"}</dd>
+        </div>
+        {source && !source.is_verified && (
+          <p className="text-xs text-muted-foreground">Wording not yet verified against the source PDF.</p>
+        )}
+        {minutes && (
+          <div className="flex justify-between gap-4">
+            <dt className="text-muted-foreground">Estimated study time</dt>
+            <dd>{minutes}</dd>
+          </div>
+        )}
       </dl>
 
       <div className="mt-5">
@@ -376,10 +410,13 @@ function DetailPanel({
 
       <div className="mt-5 space-y-2">
         <div className="rounded-md border border-dashed border-border px-3 py-2 text-xs text-muted-foreground">
-          Lessons — coming in a later phase
+          PYQs — coming in Phase 04/05
         </div>
         <div className="rounded-md border border-dashed border-border px-3 py-2 text-xs text-muted-foreground">
-          PYQs — coming in a later phase
+          Learning resources — coming later
+        </div>
+        <div className="rounded-md border border-dashed border-border px-3 py-2 text-xs text-muted-foreground">
+          Repeat analysis — coming later
         </div>
       </div>
 

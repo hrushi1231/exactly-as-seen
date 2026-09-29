@@ -20,36 +20,54 @@ export type Database = {
           duration_minutes: number | null
           exam_id: string
           id: string
+          is_current: boolean
           label: string | null
+          marks_per_correct: number | null
           negative_marking: number | null
           notes: string | null
+          recruitment_cycle: string | null
+          sections: Json
+          source_id: string | null
           total_marks: number | null
           total_questions: number | null
           updated_at: string
+          version: string
         }
         Insert: {
           created_at?: string
           duration_minutes?: number | null
           exam_id: string
           id?: string
+          is_current?: boolean
           label?: string | null
+          marks_per_correct?: number | null
           negative_marking?: number | null
           notes?: string | null
+          recruitment_cycle?: string | null
+          sections?: Json
+          source_id?: string | null
           total_marks?: number | null
           total_questions?: number | null
           updated_at?: string
+          version?: string
         }
         Update: {
           created_at?: string
           duration_minutes?: number | null
           exam_id?: string
           id?: string
+          is_current?: boolean
           label?: string | null
+          marks_per_correct?: number | null
           negative_marking?: number | null
           notes?: string | null
+          recruitment_cycle?: string | null
+          sections?: Json
+          source_id?: string | null
           total_marks?: number | null
           total_questions?: number | null
           updated_at?: string
+          version?: string
         }
         Relationships: [
           {
@@ -57,6 +75,13 @@ export type Database = {
             columns: ["exam_id"]
             isOneToOne: false
             referencedRelation: "exams"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "exam_patterns_source_id_fkey"
+            columns: ["source_id"]
+            isOneToOne: false
+            referencedRelation: "syllabus_sources"
             referencedColumns: ["id"]
           },
         ]
@@ -176,6 +201,8 @@ export type Database = {
           id: string
           name: string
           slug: string
+          source_id: string | null
+          source_text: string | null
           status: string
           updated_at: string
         }
@@ -186,6 +213,8 @@ export type Database = {
           id?: string
           name: string
           slug: string
+          source_id?: string | null
+          source_text?: string | null
           status?: string
           updated_at?: string
         }
@@ -196,10 +225,20 @@ export type Database = {
           id?: string
           name?: string
           slug?: string
+          source_id?: string | null
+          source_text?: string | null
           status?: string
           updated_at?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "subjects_source_id_fkey"
+            columns: ["source_id"]
+            isOneToOne: false
+            referencedRelation: "syllabus_sources"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       subtopics: {
         Row: {
@@ -210,6 +249,8 @@ export type Database = {
           id: string
           name: string
           slug: string
+          source_id: string | null
+          source_text: string | null
           status: string
           topic_id: string
           updated_at: string
@@ -222,6 +263,8 @@ export type Database = {
           id?: string
           name: string
           slug: string
+          source_id?: string | null
+          source_text?: string | null
           status?: string
           topic_id: string
           updated_at?: string
@@ -234,11 +277,20 @@ export type Database = {
           id?: string
           name?: string
           slug?: string
+          source_id?: string | null
+          source_text?: string | null
           status?: string
           topic_id?: string
           updated_at?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "subtopics_source_id_fkey"
+            columns: ["source_id"]
+            isOneToOne: false
+            referencedRelation: "syllabus_sources"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "subtopics_topic_id_fkey"
             columns: ["topic_id"]
@@ -247,6 +299,51 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      syllabus_sources: {
+        Row: {
+          created_at: string
+          id: string
+          is_verified: boolean
+          notes: string | null
+          source_document_version: string | null
+          source_page_end: number | null
+          source_page_start: number | null
+          source_recruitment_context: string | null
+          source_title: string
+          source_type: string
+          source_url: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_verified?: boolean
+          notes?: string | null
+          source_document_version?: string | null
+          source_page_end?: number | null
+          source_page_start?: number | null
+          source_recruitment_context?: string | null
+          source_title: string
+          source_type?: string
+          source_url?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_verified?: boolean
+          notes?: string | null
+          source_document_version?: string | null
+          source_page_end?: number | null
+          source_page_start?: number | null
+          source_recruitment_context?: string | null
+          source_title?: string
+          source_type?: string
+          source_url?: string | null
+          updated_at?: string
+        }
+        Relationships: []
       }
       topics: {
         Row: {
@@ -258,6 +355,8 @@ export type Database = {
           name: string
           parent_topic_id: string | null
           slug: string
+          source_id: string | null
+          source_text: string | null
           status: string
           subject_id: string
           updated_at: string
@@ -271,6 +370,8 @@ export type Database = {
           name: string
           parent_topic_id?: string | null
           slug: string
+          source_id?: string | null
+          source_text?: string | null
           status?: string
           subject_id: string
           updated_at?: string
@@ -284,6 +385,8 @@ export type Database = {
           name?: string
           parent_topic_id?: string | null
           slug?: string
+          source_id?: string | null
+          source_text?: string | null
           status?: string
           subject_id?: string
           updated_at?: string
@@ -294,6 +397,13 @@ export type Database = {
             columns: ["parent_topic_id"]
             isOneToOne: false
             referencedRelation: "topics"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "topics_source_id_fkey"
+            columns: ["source_id"]
+            isOneToOne: false
+            referencedRelation: "syllabus_sources"
             referencedColumns: ["id"]
           },
           {
@@ -364,6 +474,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      _import_syllabus: {
+        Args: { do_commit: boolean; payload: Json }
+        Returns: Json
+      }
       admin_exists: { Args: never; Returns: boolean }
       claim_first_admin: { Args: never; Returns: boolean }
       has_role: {
@@ -373,6 +487,11 @@ export type Database = {
         }
         Returns: boolean
       }
+      import_syllabus: {
+        Args: { do_commit?: boolean; payload: Json }
+        Returns: Json
+      }
+      syllabus_validation: { Args: never; Returns: Json }
     }
     Enums: {
       app_role: "admin" | "learner"

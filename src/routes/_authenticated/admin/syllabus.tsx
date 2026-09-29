@@ -28,6 +28,7 @@ import {
 import { supabase } from "@/integrations/supabase/client";
 import {
   fetchExams,
+  fetchSources,
   fetchMappings,
   fetchSubjects,
   fetchSubtopics,
@@ -239,12 +240,14 @@ function SyllabusAdmin() {
         description: subject.description,
         display_order: subject.display_order,
         status: subject.status,
+        exams: (exams.data ?? []).filter((e) => isMapped(e.id, "subject", subject.id)).map((e) => e.slug),
         topics: (topics.data ?? [])
           .filter((t) => t.subject_id === subject.id)
           .map((topic) => ({
             name: topic.name,
             slug: topic.slug,
             description: topic.description,
+            source_text: topic.source_text,
             display_order: topic.display_order,
             estimated_minutes: topic.estimated_minutes,
             status: topic.status,
@@ -257,6 +260,7 @@ function SyllabusAdmin() {
                 name: sub.name,
                 slug: sub.slug,
                 description: sub.description,
+                source_text: sub.source_text,
                 display_order: sub.display_order,
                 estimated_minutes: sub.estimated_minutes,
                 status: sub.status,
@@ -276,104 +280,62 @@ function SyllabusAdmin() {
     URL.revokeObjectURL(url);
   }
 
-  const importJson = useMutation({
+  type ImportPreview = {
+    subjects_create: number;
+    subjects_update: number;
+    topics_create: number;
+    topics_update: number;
+    subtopics_create: number;
+    subtopics_update: number;
+    duplicates: string[];
+    invalid_references: string[];
+  };
+  const [pending, setPending] = useState<{ payload: unknown; preview: ImportPreview } | null>(null);
+
+  const previewImport = useMutation({
     mutationFn: async (file: File) => {
-      const parsed = JSON.parse(await file.text()) as {
-        subjects?: Array<Record<string, unknown>>;
-      };
-      if (!Array.isArray(parsed.subjects)) throw new Error("File must contain a 'subjects' array");
-      const examBySlug = new Map((exams.data ?? []).map((e) => [e.slug, e.id]));
+      const payload = JSON.parse(await file.text()) as { subjects?: unknown };
+      if (!Array.isArray(payload.subjects)) throw new Error("File must contain a 'subjects' array");
+      const { data, error } = await supabase.rpc("import_syllabus" as never, {
+        payload,
+        do_commit: false,
+      } as never);
+      if (error) throw new Error((error as { message: string }).message);
+      return { payload, preview: data as unknown as ImportPreview };
+    },
+    onSuccess: (result) => setPending(result),
+    onError: (error: Error) => toast.error(error.message),
+  });
 
-      for (const [si, rawSubject] of parsed.subjects.entries()) {
-        const s = rawSubject as Record<string, any>;
-        const subjectRow = {
-          name: String(s['name'] ?? "").trim(),
-          slug: String(s['slug'] ?? slugify(String(s['name'] ?? ""))),
-          description: s['description'] ?? null,
-          display_order: Number(s['display_order'] ?? si),
-          status: String(s['status'] ?? "active"),
-        };
-        if (!subjectRow.name) continue;
-        const { data: subject, error: subjectError } = await supabase
-          .from("subjects")
-          .upsert(subjectRow, { onConflict: "slug" })
-          .select("id")
-          .single();
-        if (subjectError) throw new Error(subjectError.message);
-
-        for (const [ti, rawTopic] of ((s['topics'] ?? []) as any[]).entries()) {
-          const topicRow = {
-            subject_id: subject.id,
-            name: String(rawTopic.name ?? "").trim(),
-            slug: String(rawTopic.slug ?? slugify(String(rawTopic.name ?? ""))),
-            description: rawTopic.description ?? null,
-            display_order: Number(rawTopic.display_order ?? ti),
-            estimated_minutes: rawTopic.estimated_minutes ?? null,
-            status: String(rawTopic.status ?? "active"),
-          };
-          if (!topicRow.name) continue;
-          const { data: topic, error: topicError } = await supabase
-            .from("topics")
-            .upsert(topicRow, { onConflict: "subject_id,slug" })
-            .select("id")
-            .single();
-          if (topicError) throw new Error(topicError.message);
-
-          for (const examSlug of (rawTopic.exams ?? []) as string[]) {
-            const examId = examBySlug.get(examSlug);
-            if (!examId) continue;
-            await supabase.from("exam_syllabus_mapping").upsert(
-              {
-                exam_id: examId,
-                entity_type: "topic",
-                entity_id: topic.id,
-                is_included: true,
-              },
-              { onConflict: "exam_id,entity_type,entity_id" },
-            );
-          }
-
-          for (const [ui, rawSub] of ((rawTopic.subtopics ?? []) as any[]).entries()) {
-            const subRow = {
-              topic_id: topic.id,
-              name: String(rawSub.name ?? "").trim(),
-              slug: String(rawSub.slug ?? slugify(String(rawSub.name ?? ""))),
-              description: rawSub.description ?? null,
-              display_order: Number(rawSub.display_order ?? ui),
-              estimated_minutes: rawSub.estimated_minutes ?? null,
-              status: String(rawSub.status ?? "active"),
-            };
-            if (!subRow.name) continue;
-            const { data: sub, error: subError } = await supabase
-              .from("subtopics")
-              .upsert(subRow, { onConflict: "topic_id,slug" })
-              .select("id")
-              .single();
-            if (subError) throw new Error(subError.message);
-
-            for (const examSlug of (rawSub.exams ?? []) as string[]) {
-              const examId = examBySlug.get(examSlug);
-              if (!examId) continue;
-              await supabase.from("exam_syllabus_mapping").upsert(
-                {
-                  exam_id: examId,
-                  entity_type: "subtopic",
-                  entity_id: sub.id,
-                  is_included: true,
-                },
-                { onConflict: "exam_id,entity_type,entity_id" },
-              );
-            }
-          }
-        }
-      }
+  const commitImport = useMutation({
+    mutationFn: async () => {
+      if (!pending) return;
+      // Runs as one database transaction: any failure rolls back the whole import.
+      const { error } = await supabase.rpc("import_syllabus" as never, {
+        payload: pending.payload,
+        do_commit: true,
+      } as never);
+      if (error) throw new Error((error as { message: string }).message);
     },
     onSuccess: () => {
       toast.success("Syllabus imported");
+      setPending(null);
       refresh();
+      queryClient.invalidateQueries({ queryKey: ["validation"] });
+      queryClient.invalidateQueries({ queryKey: ["sources"] });
     },
-    onError: (error: Error) => toast.error(error.message),
+    onError: (error: Error) => toast.error(`Import failed, nothing was changed: ${error.message}`),
   });
+
+  const validation = useQuery({
+    queryKey: ["validation", subjects.dataUpdatedAt, topics.dataUpdatedAt, subtopics.dataUpdatedAt, mappings.dataUpdatedAt],
+    queryFn: async () => {
+      const { data, error } = await supabase.rpc("syllabus_validation" as never);
+      if (error) throw new Error((error as { message: string }).message);
+      return data as unknown as Record<string, number>;
+    },
+  });
+  const sources = useQuery({ queryKey: ["sources"], queryFn: fetchSources });
 
   function move(type: EntityType, list: Array<{ id: string }>, index: number, delta: number) {
     const next = index + delta;
@@ -461,7 +423,7 @@ function SyllabusAdmin() {
             className="hidden"
             onChange={(e) => {
               const file = e.target.files?.[0];
-              if (file) importJson.mutate(file);
+              if (file) previewImport.mutate(file);
               e.target.value = "";
             }}
           />
@@ -491,6 +453,77 @@ function SyllabusAdmin() {
           ))}
         </select>
       </div>
+
+      <section className="mb-4 rounded-md border border-border bg-card p-3">
+        <div className="text-[11px] uppercase tracking-wider text-muted-foreground">
+          Validation summary (live from database)
+        </div>
+        {validation.data ? (
+          <dl className="mt-2 grid grid-cols-2 gap-x-6 gap-y-1 text-sm sm:grid-cols-4 lg:grid-cols-7">
+            {[
+              ["Subjects", "total_subjects"],
+              ["Topics", "total_topics"],
+              ["Subtopics", "total_subtopics"],
+              ["Unmapped", "unmapped_records"],
+              ["Orphans", "orphan_records"],
+              ["Duplicate slugs", "duplicate_slugs"],
+              ["Missing parents", "missing_parent_references"],
+            ].map(([label, key]) => (
+              <div key={key}>
+                <dt className="text-xs text-muted-foreground">{label}</dt>
+                <dd className="font-medium tabular-nums">{validation.data[key!] ?? 0}</dd>
+              </div>
+            ))}
+          </dl>
+        ) : (
+          <p className="mt-2 text-xs text-muted-foreground">Loading…</p>
+        )}
+        {(sources.data ?? []).map((src) => (
+          <p key={src.id} className="mt-2 text-xs text-muted-foreground">
+            Source: {src.source_title}
+            {src.source_document_version ? ` · document version ${src.source_document_version}` : ""}
+            {src.source_recruitment_context ? ` · ${src.source_recruitment_context}` : ""}
+            {src.is_verified ? " · verified" : " · not yet verified"}
+          </p>
+        ))}
+      </section>
+
+      <Dialog open={Boolean(pending)} onOpenChange={(open) => !open && setPending(null)}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Import preview</DialogTitle>
+          </DialogHeader>
+          {pending && (
+            <div className="space-y-3 text-sm">
+              <dl className="grid grid-cols-2 gap-y-1">
+                <dt className="text-muted-foreground">Subjects to create</dt><dd>{pending.preview.subjects_create}</dd>
+                <dt className="text-muted-foreground">Topics to create</dt><dd>{pending.preview.topics_create}</dd>
+                <dt className="text-muted-foreground">Subtopics to create</dt><dd>{pending.preview.subtopics_create}</dd>
+                <dt className="text-muted-foreground">Records to update</dt>
+                <dd>{pending.preview.subjects_update + pending.preview.topics_update + pending.preview.subtopics_update}</dd>
+                <dt className="text-muted-foreground">Duplicates detected</dt><dd>{pending.preview.duplicates.length}</dd>
+                <dt className="text-muted-foreground">Invalid references</dt><dd>{pending.preview.invalid_references.length}</dd>
+              </dl>
+              {[...pending.preview.duplicates, ...pending.preview.invalid_references].length > 0 && (
+                <ul className="max-h-40 overflow-auto rounded border border-border p-2 text-xs text-muted-foreground">
+                  {[...pending.preview.duplicates, ...pending.preview.invalid_references].map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              )}
+              <p className="text-xs text-muted-foreground">
+                Duplicates and invalid entries are skipped. The import runs all-or-nothing.
+              </p>
+            </div>
+          )}
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setPending(null)}>Cancel</Button>
+            <Button onClick={() => commitImport.mutate()} disabled={commitImport.isPending}>
+              {commitImport.isPending ? "Importing…" : "Import"}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
 
       {loading && <p className="text-sm text-muted-foreground">Loading syllabus…</p>}
 

@@ -1,0 +1,2651 @@
+{
+ "source": {
+  "source_title": "OAVS PGT Computer Science — Annexure VI",
+  "source_document_version": "2024",
+  "source_recruitment_context": "Referenced from OAVS Teacher Syllabus 2026 preparation source",
+  "source_type": "official_syllabus",
+  "is_verified": false,
+  "notes": "Annexure-VI \"Syllabus for written examination for PGT (Computer Science)\". Structured into study units; wording to be verified line-by-line against the PDF."
+ },
+ "subjects": [
+  {
+   "name": "Computer Systems Architecture",
+   "slug": "computer-systems-architecture",
+   "exams": [
+    "oavs-pgt-cs"
+   ],
+   "topics": [
+    {
+     "name": "Computer Organisation Basics",
+     "slug": "computer-organisation-basics",
+     "source_text": "Basic organisation of a computer: CPU, memory, input/output units and their interconnection.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Functional units of a computer",
+       "slug": "functional-units-of-a-computer",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Von Neumann architecture",
+       "slug": "von-neumann-architecture",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Bus structure: data, address and control bus",
+       "slug": "bus-structure-data-address-and-control-bus",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Instruction Set and Addressing",
+     "slug": "instruction-set-and-addressing",
+     "source_text": "Instruction formats, instruction types and addressing modes.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Instruction formats",
+       "slug": "instruction-formats",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Instruction types",
+       "slug": "instruction-types",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Addressing modes",
+       "slug": "addressing-modes",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Central Processing Unit",
+     "slug": "central-processing-unit",
+     "source_text": "CPU organisation, registers, ALU and control unit design.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "General register organisation",
+       "slug": "general-register-organisation",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Stack organisation",
+       "slug": "stack-organisation",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Arithmetic and logic unit",
+       "slug": "arithmetic-and-logic-unit",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Hardwired and microprogrammed control",
+       "slug": "hardwired-and-microprogrammed-control",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Memory Organisation",
+     "slug": "memory-organisation",
+     "source_text": "Memory hierarchy, main memory, cache and virtual memory.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Memory hierarchy",
+       "slug": "memory-hierarchy",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "RAM and ROM types",
+       "slug": "ram-and-rom-types",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Cache memory and mapping techniques",
+       "slug": "cache-memory-and-mapping-techniques",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Virtual memory",
+       "slug": "virtual-memory",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Secondary storage devices",
+       "slug": "secondary-storage-devices",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Input-Output Organisation",
+     "slug": "input-output-organisation",
+     "source_text": "Peripheral devices, I/O interface and modes of data transfer.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Peripheral devices",
+       "slug": "peripheral-devices",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "I/O interface",
+       "slug": "i-o-interface",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Programmed I/O and interrupt-driven I/O",
+       "slug": "programmed-i-o-and-interrupt-driven-i-o",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Direct memory access (DMA)",
+       "slug": "direct-memory-access-dma",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Parallel Processing",
+     "slug": "parallel-processing",
+     "source_text": "Pipelining and multiprocessor concepts.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Pipelining",
+       "slug": "pipelining",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Multiprocessor systems",
+       "slug": "multiprocessor-systems",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Operating Systems",
+   "slug": "operating-systems",
+   "exams": [
+    "oavs-pgt-cs"
+   ],
+   "topics": [
+    {
+     "name": "Operating System Fundamentals",
+     "slug": "operating-system-fundamentals",
+     "source_text": "Definition, functions and types of operating systems.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Functions of an operating system",
+       "slug": "functions-of-an-operating-system",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Batch, multiprogramming and time-sharing systems",
+       "slug": "batch-multiprogramming-and-time-sharing-systems",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Real-time and distributed systems",
+       "slug": "real-time-and-distributed-systems",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "System calls",
+       "slug": "system-calls",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Processes",
+     "slug": "processes",
+     "source_text": "Process concept, process states and process control block.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Process concept",
+       "slug": "process-concept",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Process states",
+       "slug": "process-states",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Process control block",
+       "slug": "process-control-block",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Threads",
+       "slug": "threads",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Scheduling",
+     "slug": "scheduling",
+     "source_text": "CPU scheduling mechanisms and strategies.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Scheduling mechanisms",
+       "slug": "scheduling-mechanisms",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Strategy selection",
+       "slug": "strategy-selection",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Non-pre-emptive scheduling",
+       "slug": "non-pre-emptive-scheduling",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Pre-emptive scheduling",
+       "slug": "pre-emptive-scheduling",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Synchronization Principles",
+     "slug": "synchronization-principles",
+     "source_text": "Process synchronisation and communication.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Critical section",
+       "slug": "critical-section",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Semaphores",
+       "slug": "semaphores",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Monitors",
+       "slug": "monitors",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Inter-process communication",
+       "slug": "inter-process-communication",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Deadlocks",
+     "slug": "deadlocks",
+     "source_text": "Deadlock model, prevention, avoidance and recovery.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Deadlock model",
+       "slug": "deadlock-model",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Prevention",
+       "slug": "prevention",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Hold and wait",
+       "slug": "hold-and-wait",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Circular wait",
+       "slug": "circular-wait",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Pre-emption",
+       "slug": "pre-emption",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Banker's Algorithm",
+       "slug": "banker-s-algorithm",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Resource recovery",
+       "slug": "resource-recovery",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Memory Management",
+     "slug": "memory-management",
+     "source_text": "Allocation of main memory to processes.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Contiguous allocation",
+       "slug": "contiguous-allocation",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Paging",
+       "slug": "paging",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Segmentation",
+       "slug": "segmentation",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Virtual memory and demand paging",
+       "slug": "virtual-memory-and-demand-paging",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Page replacement algorithms",
+       "slug": "page-replacement-algorithms",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "File Systems",
+     "slug": "file-systems",
+     "source_text": "File concepts, access methods and directory structures.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "File concept and attributes",
+       "slug": "file-concept-and-attributes",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Access methods",
+       "slug": "access-methods",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Directory structure",
+       "slug": "directory-structure",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Disk scheduling",
+       "slug": "disk-scheduling",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Device Management",
+     "slug": "device-management",
+     "source_text": "Management of I/O devices.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Device drivers",
+       "slug": "device-drivers",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Buffering and spooling",
+       "slug": "buffering-and-spooling",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Digital Electronics",
+   "slug": "digital-electronics",
+   "exams": [
+    "oavs-pgt-cs"
+   ],
+   "topics": [
+    {
+     "name": "Number Systems",
+     "slug": "number-systems",
+     "source_text": "Binary, octal, decimal and hexadecimal number systems and conversions.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Number system conversions",
+       "slug": "number-system-conversions",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Binary arithmetic",
+       "slug": "binary-arithmetic",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Complements and signed numbers",
+       "slug": "complements-and-signed-numbers",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Codes",
+     "slug": "codes",
+     "source_text": "Binary codes used in digital systems.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "BCD, Excess-3 and Gray codes",
+       "slug": "bcd-excess-3-and-gray-codes",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "ASCII and EBCDIC",
+       "slug": "ascii-and-ebcdic",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Error detecting codes: parity",
+       "slug": "error-detecting-codes-parity",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Boolean Algebra",
+     "slug": "boolean-algebra",
+     "source_text": "Boolean laws and theorems.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Boolean postulates and laws",
+       "slug": "boolean-postulates-and-laws",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "De Morgan's theorems",
+       "slug": "de-morgan-s-theorems",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Canonical forms: SOP and POS",
+       "slug": "canonical-forms-sop-and-pos",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Simplification with Karnaugh maps",
+       "slug": "simplification-with-karnaugh-maps",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Logic Gates",
+     "slug": "logic-gates",
+     "source_text": "Basic and universal gates.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Basic gates: AND, OR, NOT",
+       "slug": "basic-gates-and-or-not",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Universal gates: NAND, NOR",
+       "slug": "universal-gates-nand-nor",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "XOR and XNOR gates",
+       "slug": "xor-and-xnor-gates",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Implementation using universal gates",
+       "slug": "implementation-using-universal-gates",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Combinational Circuits",
+     "slug": "combinational-circuits",
+     "source_text": "Design of combinational logic.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Half and full adders",
+       "slug": "half-and-full-adders",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Half and full subtractors",
+       "slug": "half-and-full-subtractors",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Multiplexers and demultiplexers",
+       "slug": "multiplexers-and-demultiplexers",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Encoders and decoders",
+       "slug": "encoders-and-decoders",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Sequential Circuits",
+     "slug": "sequential-circuits",
+     "source_text": "Flip-flops, registers and counters.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Flip-flops: SR, JK, D, T",
+       "slug": "flip-flops-sr-jk-d-t",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Registers and shift registers",
+       "slug": "registers-and-shift-registers",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Counters",
+       "slug": "counters",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Programming Fundamentals",
+   "slug": "programming-fundamentals",
+   "exams": [
+    "oavs-pgt-cs"
+   ],
+   "topics": [
+    {
+     "name": "Problem Solving",
+     "slug": "problem-solving",
+     "source_text": "Problem-solving methodology.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Algorithms",
+       "slug": "algorithms",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Flowcharts",
+       "slug": "flowcharts",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Pseudo-code",
+       "slug": "pseudo-code",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Decision tables",
+       "slug": "decision-tables",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Programming Concepts",
+     "slug": "programming-concepts",
+     "source_text": "Basic programming building blocks.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Data types, constants and variables",
+       "slug": "data-types-constants-and-variables",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Operators and expressions",
+       "slug": "operators-and-expressions",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Control structures: sequence, selection, iteration",
+       "slug": "control-structures-sequence-selection-iteration",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Modular programming: procedures and functions",
+       "slug": "modular-programming-procedures-and-functions",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Programming Methodologies",
+     "slug": "programming-methodologies",
+     "source_text": "Approaches to program development.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Top-down and bottom-up design",
+       "slug": "top-down-and-bottom-up-design",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Structured programming",
+       "slug": "structured-programming",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Object-oriented programming concepts",
+       "slug": "object-oriented-programming-concepts",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Program Development",
+     "slug": "program-development",
+     "source_text": "Translation and debugging of programs.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Compilers, interpreters and assemblers",
+       "slug": "compilers-interpreters-and-assemblers",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Types of errors",
+       "slug": "types-of-errors",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Testing and debugging",
+       "slug": "testing-and-debugging",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Documentation",
+       "slug": "documentation",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Programming Tool — Visual Basic",
+   "slug": "programming-tool-visual-basic",
+   "exams": [
+    "oavs-pgt-cs"
+   ],
+   "topics": [
+    {
+     "name": "Visual Basic Environment",
+     "slug": "visual-basic-environment",
+     "source_text": "Introduction to the Visual Basic IDE and event-driven programming.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Event-driven programming",
+       "slug": "event-driven-programming",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "IDE: toolbox, properties window, project explorer",
+       "slug": "ide-toolbox-properties-window-project-explorer",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Forms and controls",
+       "slug": "forms-and-controls",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Visual Basic Language",
+     "slug": "visual-basic-language",
+     "source_text": "Language elements of Visual Basic.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Data types, variables and constants",
+       "slug": "data-types-variables-and-constants",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Operators",
+       "slug": "operators",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Decision structures",
+       "slug": "decision-structures",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Loop structures",
+       "slug": "loop-structures",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Arrays",
+       "slug": "arrays",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Procedures and Functions",
+     "slug": "procedures-and-functions",
+     "source_text": "Sub procedures, function procedures and built-in functions.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Sub procedures",
+       "slug": "sub-procedures",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Function procedures",
+       "slug": "function-procedures",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Built-in string, math and date functions",
+       "slug": "built-in-string-math-and-date-functions",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Controls and Events",
+     "slug": "controls-and-events",
+     "source_text": "Working with standard and ActiveX controls.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Standard controls",
+       "slug": "standard-controls",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Properties, methods and events",
+       "slug": "properties-methods-and-events",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Menus and dialog boxes",
+       "slug": "menus-and-dialog-boxes",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "MDI forms",
+       "slug": "mdi-forms",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Database Connectivity in VB",
+     "slug": "database-connectivity-in-vb",
+     "source_text": "Accessing databases from Visual Basic.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Data control",
+       "slug": "data-control",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "ADO and data-bound controls",
+       "slug": "ado-and-data-bound-controls",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Data Structures",
+   "slug": "data-structures",
+   "exams": [
+    "oavs-pgt-cs"
+   ],
+   "topics": [
+    {
+     "name": "Arrays",
+     "slug": "arrays",
+     "source_text": "One- and two-dimensional arrays and their operations.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "One-dimensional arrays",
+       "slug": "one-dimensional-arrays",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Two-dimensional arrays",
+       "slug": "two-dimensional-arrays",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Row-major and column-major address calculation",
+       "slug": "row-major-and-column-major-address-calculation",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Searching",
+     "slug": "searching",
+     "source_text": "Searching techniques.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Linear search",
+       "slug": "linear-search",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Binary search",
+       "slug": "binary-search",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Sorting",
+     "slug": "sorting",
+     "source_text": "Sorting techniques.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Selection sort",
+       "slug": "selection-sort",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Bubble sort",
+       "slug": "bubble-sort",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Insertion sort",
+       "slug": "insertion-sort",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Merge sort",
+       "slug": "merge-sort",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Quick sort",
+       "slug": "quick-sort",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Stacks",
+     "slug": "stacks",
+     "source_text": "Stack operations and applications.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Stack using arrays",
+       "slug": "stack-using-arrays",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Stack using linked lists",
+       "slug": "stack-using-linked-lists",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Infix, prefix and postfix conversion",
+       "slug": "infix-prefix-and-postfix-conversion",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Evaluation of postfix expressions",
+       "slug": "evaluation-of-postfix-expressions",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Queues",
+     "slug": "queues",
+     "source_text": "Queue operations and variants.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Queue using arrays",
+       "slug": "queue-using-arrays",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Queue using linked lists",
+       "slug": "queue-using-linked-lists",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Circular queue",
+       "slug": "circular-queue",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Linked Lists",
+     "slug": "linked-lists",
+     "source_text": "Dynamic data structures with pointers.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Singly linked list",
+       "slug": "singly-linked-list",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Doubly linked list",
+       "slug": "doubly-linked-list",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Circular linked list",
+       "slug": "circular-linked-list",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Trees",
+     "slug": "trees",
+     "source_text": "Tree terminology and binary trees.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Binary trees",
+       "slug": "binary-trees",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Tree traversals",
+       "slug": "tree-traversals",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Binary search trees",
+       "slug": "binary-search-trees",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Programming in C++",
+   "slug": "programming-in-c",
+   "exams": [
+    "oavs-pgt-cs"
+   ],
+   "topics": [
+    {
+     "name": "C++ Basics",
+     "slug": "c-basics",
+     "source_text": "Tokens, data types and I/O.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Character set and tokens",
+       "slug": "character-set-and-tokens",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Data types and type conversion",
+       "slug": "data-types-and-type-conversion",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Operators and expressions",
+       "slug": "operators-and-expressions",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Input/output streams",
+       "slug": "input-output-streams",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Flow of Control",
+     "slug": "flow-of-control",
+     "source_text": "Conditional and iterative statements.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "if and switch statements",
+       "slug": "if-and-switch-statements",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Loops: for, while, do-while",
+       "slug": "loops-for-while-do-while",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Jump statements",
+       "slug": "jump-statements",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Functions",
+     "slug": "functions",
+     "source_text": "Defining and calling functions.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Function prototypes and calls",
+       "slug": "function-prototypes-and-calls",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Call by value and call by reference",
+       "slug": "call-by-value-and-call-by-reference",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Default arguments and inline functions",
+       "slug": "default-arguments-and-inline-functions",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Function overloading",
+       "slug": "function-overloading",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Recursion",
+       "slug": "recursion",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Structured Data Types",
+     "slug": "structured-data-types",
+     "source_text": "Arrays, strings, structures and user-defined types.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Arrays and strings",
+       "slug": "arrays-and-strings",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Structures",
+       "slug": "structures",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "typedef, enum and #define",
+       "slug": "typedef-enum-and-define",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Object-Oriented Programming",
+     "slug": "object-oriented-programming",
+     "source_text": "Classes and objects.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Classes and objects",
+       "slug": "classes-and-objects",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Access specifiers and data hiding",
+       "slug": "access-specifiers-and-data-hiding",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Constructors and destructors",
+       "slug": "constructors-and-destructors",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Inheritance",
+       "slug": "inheritance",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Polymorphism and virtual functions",
+       "slug": "polymorphism-and-virtual-functions",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Pointers",
+     "slug": "pointers",
+     "source_text": "Pointer concepts in C++.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Pointers and arrays",
+       "slug": "pointers-and-arrays",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Dynamic memory allocation: new and delete",
+       "slug": "dynamic-memory-allocation-new-and-delete",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "this pointer",
+       "slug": "this-pointer",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Pointers to objects and structures",
+       "slug": "pointers-to-objects-and-structures",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "File Handling",
+     "slug": "file-handling",
+     "source_text": "Data file operations using streams.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Text files",
+       "slug": "text-files",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Binary files",
+       "slug": "binary-files",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "File pointers and random access",
+       "slug": "file-pointers-and-random-access",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Relational Database Management System",
+   "slug": "relational-database-management-system",
+   "exams": [
+    "oavs-pgt-cs"
+   ],
+   "topics": [
+    {
+     "name": "Database Concepts",
+     "slug": "database-concepts",
+     "source_text": "Basic database terminology.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Need for DBMS",
+       "slug": "need-for-dbms",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Data abstraction and independence",
+       "slug": "data-abstraction-and-independence",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Data models: hierarchical, network, relational",
+       "slug": "data-models-hierarchical-network-relational",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Relational Model",
+     "slug": "relational-model",
+     "source_text": "Relations, keys and relational algebra.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Relation, tuple, attribute, domain",
+       "slug": "relation-tuple-attribute-domain",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Keys: primary, candidate, alternate, foreign",
+       "slug": "keys-primary-candidate-alternate-foreign",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Relational algebra operations",
+       "slug": "relational-algebra-operations",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Normalisation",
+     "slug": "normalisation",
+     "source_text": "Database design using normal forms.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Functional dependency",
+       "slug": "functional-dependency",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "1NF, 2NF and 3NF",
+       "slug": "1nf-2nf-and-3nf",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "BCNF",
+       "slug": "bcnf",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Entity-Relationship Model",
+     "slug": "entity-relationship-model",
+     "source_text": "Conceptual database design.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Entities, attributes and relationships",
+       "slug": "entities-attributes-and-relationships",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "ER diagrams",
+       "slug": "er-diagrams",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "SQL",
+     "slug": "sql",
+     "source_text": "Structured Query Language.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "DDL commands",
+       "slug": "ddl-commands",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "DML commands",
+       "slug": "dml-commands",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Constraints",
+       "slug": "constraints",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Aggregate functions and GROUP BY",
+       "slug": "aggregate-functions-and-group-by",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Joins",
+       "slug": "joins",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Subqueries",
+       "slug": "subqueries",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Views",
+       "slug": "views",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Oracle and SQL*Plus",
+     "slug": "oracle-and-sql-plus",
+     "source_text": "Working with Oracle through SQL*Plus.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "SQL*Plus environment and commands",
+       "slug": "sql-plus-environment-and-commands",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Oracle data types",
+       "slug": "oracle-data-types",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "PL/SQL",
+     "slug": "pl-sql",
+     "source_text": "Procedural extensions in Oracle.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "PL/SQL block structure",
+       "slug": "pl-sql-block-structure",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Cursors",
+       "slug": "cursors",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Procedures and functions",
+       "slug": "procedures-and-functions",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Triggers",
+       "slug": "triggers",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Exception handling",
+       "slug": "exception-handling",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Transactions",
+     "slug": "transactions",
+     "source_text": "Transaction management and control.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "ACID properties",
+       "slug": "acid-properties",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "COMMIT, ROLLBACK and SAVEPOINT",
+       "slug": "commit-rollback-and-savepoint",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Concurrency control",
+       "slug": "concurrency-control",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Business Computing",
+   "slug": "business-computing",
+   "exams": [
+    "oavs-pgt-cs"
+   ],
+   "topics": [
+    {
+     "name": "Word Processing",
+     "slug": "word-processing",
+     "source_text": "Document preparation with a word processor.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Formatting documents",
+       "slug": "formatting-documents",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Tables and mail merge",
+       "slug": "tables-and-mail-merge",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Spreadsheets",
+     "slug": "spreadsheets",
+     "source_text": "Worksheet operations and analysis.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Formulas and functions",
+       "slug": "formulas-and-functions",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Charts",
+       "slug": "charts",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Data sorting and filtering",
+       "slug": "data-sorting-and-filtering",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Presentation Software",
+     "slug": "presentation-software",
+     "source_text": "Creating presentations.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Slides, layouts and templates",
+       "slug": "slides-layouts-and-templates",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Animation and transitions",
+       "slug": "animation-and-transitions",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Business Applications",
+     "slug": "business-applications",
+     "source_text": "Computing in business.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Payroll, inventory and accounting applications",
+       "slug": "payroll-inventory-and-accounting-applications",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Management information systems",
+       "slug": "management-information-systems",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "E-commerce concepts",
+       "slug": "e-commerce-concepts",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Web Development",
+   "slug": "web-development",
+   "exams": [
+    "oavs-pgt-cs"
+   ],
+   "topics": [
+    {
+     "name": "Internet and WWW",
+     "slug": "internet-and-www",
+     "source_text": "Internet fundamentals.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Internet services",
+       "slug": "internet-services",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Web browsers and web servers",
+       "slug": "web-browsers-and-web-servers",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "URL, HTTP and domain names",
+       "slug": "url-http-and-domain-names",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "HTML",
+     "slug": "html",
+     "source_text": "Structuring web pages.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "HTML document structure",
+       "slug": "html-document-structure",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Text formatting tags",
+       "slug": "text-formatting-tags",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Lists",
+       "slug": "lists",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Tables",
+       "slug": "tables",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Images and hyperlinks",
+       "slug": "images-and-hyperlinks",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Frames",
+       "slug": "frames",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Forms",
+       "slug": "forms",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "DHTML",
+     "slug": "dhtml",
+     "source_text": "Dynamic HTML.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Cascading Style Sheets",
+       "slug": "cascading-style-sheets",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Document Object Model",
+       "slug": "document-object-model",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Dynamic content and positioning",
+       "slug": "dynamic-content-and-positioning",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "XML",
+     "slug": "xml",
+     "source_text": "Extensible Markup Language.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "XML document structure",
+       "slug": "xml-document-structure",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "DTD",
+       "slug": "dtd",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Well-formed and valid documents",
+       "slug": "well-formed-and-valid-documents",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "XML vs HTML",
+       "slug": "xml-vs-html",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Web Scripting",
+   "slug": "web-scripting",
+   "exams": [
+    "oavs-pgt-cs"
+   ],
+   "topics": [
+    {
+     "name": "Client-Side Scripting",
+     "slug": "client-side-scripting",
+     "source_text": "Client-side scripting concepts.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Role of client-side scripts",
+       "slug": "role-of-client-side-scripts",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "JavaScript basics",
+       "slug": "javascript-basics",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "VBScript",
+     "slug": "vbscript",
+     "source_text": "Scripting with VBScript.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "VBScript data types and variables",
+       "slug": "vbscript-data-types-and-variables",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Operators and control structures",
+       "slug": "operators-and-control-structures",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Procedures and functions",
+       "slug": "procedures-and-functions",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Handling form events",
+       "slug": "handling-form-events",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "ASP",
+     "slug": "asp",
+     "source_text": "Active Server Pages.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "ASP architecture",
+       "slug": "asp-architecture",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Request and Response objects",
+       "slug": "request-and-response-objects",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Session and Application objects",
+       "slug": "session-and-application-objects",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Server object and cookies",
+       "slug": "server-object-and-cookies",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Database access with ADO",
+       "slug": "database-access-with-ado",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Multimedia and Authoring Tools",
+   "slug": "multimedia-and-authoring-tools",
+   "exams": [
+    "oavs-pgt-cs"
+   ],
+   "topics": [
+    {
+     "name": "Multimedia Concepts",
+     "slug": "multimedia-concepts",
+     "source_text": "Elements and applications of multimedia.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Text, graphics, audio, video and animation",
+       "slug": "text-graphics-audio-video-and-animation",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Multimedia applications",
+       "slug": "multimedia-applications",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "File formats and compression",
+       "slug": "file-formats-and-compression",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Image Editing",
+     "slug": "image-editing",
+     "source_text": "Working with images.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Raster and vector graphics",
+       "slug": "raster-and-vector-graphics",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Image editing tools",
+       "slug": "image-editing-tools",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Macromedia Flash",
+     "slug": "macromedia-flash",
+     "source_text": "Animation authoring with Flash.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Flash interface: stage, timeline, layers",
+       "slug": "flash-interface-stage-timeline-layers",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Symbols and instances",
+       "slug": "symbols-and-instances",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Motion and shape tweening",
+       "slug": "motion-and-shape-tweening",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "ActionScript basics",
+       "slug": "actionscript-basics",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Authoring Tools",
+     "slug": "authoring-tools",
+     "source_text": "Multimedia authoring.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Types of authoring tools",
+       "slug": "types-of-authoring-tools",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Publishing multimedia content",
+       "slug": "publishing-multimedia-content",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Communication and Network Concepts",
+   "slug": "communication-and-network-concepts",
+   "exams": [
+    "oavs-pgt-cs"
+   ],
+   "topics": [
+    {
+     "name": "Evolution of Networking",
+     "slug": "evolution-of-networking",
+     "source_text": "Origins of computer networks.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "ARPANET and the Internet",
+       "slug": "arpanet-and-the-internet",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Interspace",
+       "slug": "interspace",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Data Communication",
+     "slug": "data-communication",
+     "source_text": "Data communication fundamentals.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Bandwidth and data transfer rate",
+       "slug": "bandwidth-and-data-transfer-rate",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Transmission media: guided",
+       "slug": "transmission-media-guided",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Transmission media: unguided",
+       "slug": "transmission-media-unguided",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Switching techniques",
+       "slug": "switching-techniques",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Network Devices",
+     "slug": "network-devices",
+     "source_text": "Hardware used in networks.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Modem",
+       "slug": "modem",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Hub, switch and repeater",
+       "slug": "hub-switch-and-repeater",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Router, bridge and gateway",
+       "slug": "router-bridge-and-gateway",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Network Types and Topologies",
+     "slug": "network-types-and-topologies",
+     "source_text": "Classification of networks.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "LAN, MAN, WAN and PAN",
+       "slug": "lan-man-wan-and-pan",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Bus, star, ring and tree topologies",
+       "slug": "bus-star-ring-and-tree-topologies",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Network Protocols",
+     "slug": "network-protocols",
+     "source_text": "Protocols and models.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "OSI reference model",
+       "slug": "osi-reference-model",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "TCP/IP",
+       "slug": "tcp-ip",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "HTTP, FTP, SMTP and POP",
+       "slug": "http-ftp-smtp-and-pop",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Wireless and mobile communication: GSM, CDMA",
+       "slug": "wireless-and-mobile-communication-gsm-cdma",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Network Security",
+     "slug": "network-security",
+     "source_text": "Threats and protection.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "Viruses and malware",
+       "slug": "viruses-and-malware",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Firewalls",
+       "slug": "firewalls",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Cyber law and IT Act",
+       "slug": "cyber-law-and-it-act",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Cookies and hacking",
+       "slug": "cookies-and-hacking",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Web Services",
+     "slug": "web-services",
+     "source_text": "Web-based services.",
+     "exams": [
+      "oavs-pgt-cs"
+     ],
+     "subtopics": [
+      {
+       "name": "WWW, web hosting",
+       "slug": "www-web-hosting",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      },
+      {
+       "name": "Open source concepts",
+       "slug": "open-source-concepts",
+       "exams": [
+        "oavs-pgt-cs"
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
