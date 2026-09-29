@@ -85,6 +85,10 @@ function SyllabusAdmin() {
   );
   const [search, setSearch] = useState("");
   const [examFilter, setExamFilter] = useState<string>("all");
+  const [statusFilter, setStatusFilter] = useState<StatusFilter>("all");
+  const [sourceView, setSourceView] = useState<
+    { type: "topic" | "subtopic"; node: Topic | Subtopic; path: string } | null
+  >(null);
   const fileRef = useRef<HTMLInputElement>(null);
 
   const exams = useQuery({ queryKey: ["exams"], queryFn: fetchExams });
@@ -214,12 +218,27 @@ function SyllabusAdmin() {
     }));
   }, [subjects.data, topics.data, subtopics.data]);
 
+  const passesStatus = (n: Topic | Subtopic) => {
+    switch (statusFilter) {
+      case "all": return true;
+      case "missing_wording": return !n.original_syllabus_wording;
+      case "missing_page": return n.source_page == null;
+      default: return n.verification_status === statusFilter;
+    }
+  };
+
   const filtered = tree
     .map(({ subject, topics: entries }) => ({
       subject,
-      topics: entries.filter(
+      topics: entries
+        .map((e) => ({
+          ...e,
+          subtopics: statusFilter === "all" ? e.subtopics : e.subtopics.filter(passesStatus),
+        }))
+        .filter(
         ({ topic, subtopics: subs }) =>
           (matches(topic.name) || subs.some((s) => matches(s['name'])) || matches(subject.name)) &&
+          (statusFilter === "all" || passesStatus(topic) || subs.length > 0) &&
           (examFilter === "all" ||
             passesExam("topic", topic.id) ||
             subs.some((s) => passesExam("subtopic", s.id))),
@@ -452,7 +471,61 @@ function SyllabusAdmin() {
             </option>
           ))}
         </select>
+        <select
+          value={statusFilter}
+          onChange={(e) => setStatusFilter(e.target.value as StatusFilter)}
+          className="h-9 rounded-md border border-border bg-card px-2 text-sm"
+          aria-label="Verification filter"
+        >
+          <option value="all">All verification states</option>
+          <option value="verified">Verified</option>
+          <option value="unverified">Unverified</option>
+          <option value="needs_review">Needs review</option>
+          <option value="missing_wording">Missing original wording</option>
+          <option value="missing_page">Missing source page</option>
+        </select>
       </div>
+
+      <Dialog open={Boolean(sourceView)} onOpenChange={(open) => !open && setSourceView(null)}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Source information</DialogTitle>
+          </DialogHeader>
+          {sourceView && (() => {
+            const n = sourceView.node;
+            const src = (sources.data ?? []).find((s) => s.id === n.source_id);
+            const pageEnd = "source_page_end" in n ? n.source_page_end : null;
+            return (
+              <div className="space-y-3 text-sm">
+                <div>
+                  <div className="text-[11px] uppercase tracking-wider text-muted-foreground">{sourceView.path}</div>
+                  <div className="font-medium">{n.name}</div>
+                  <div className="mt-1"><VerificationBadge status={n.verification_status} /></div>
+                </div>
+                <div>
+                  <div className="text-xs text-muted-foreground">Original syllabus wording</div>
+                  <blockquote className="mt-1 border-l-2 border-primary/40 pl-3 text-xs leading-relaxed">
+                    {n.original_syllabus_wording || "Not recorded"}
+                  </blockquote>
+                  {n.source_text && <p className="mt-1 text-[11px] text-muted-foreground">{n.source_text}</p>}
+                </div>
+                <dl className="grid grid-cols-2 gap-y-1">
+                  <dt className="text-muted-foreground">Source</dt><dd>{src?.source_title ?? "Not recorded"}</dd>
+                  <dt className="text-muted-foreground">Document version</dt><dd>{src?.source_document_version ?? "—"}</dd>
+                  <dt className="text-muted-foreground">Page</dt>
+                  <dd>{n.source_page ? (pageEnd && pageEnd !== n.source_page ? `${n.source_page}–${pageEnd}` : n.source_page) : "Missing"}</dd>
+                  <dt className="text-muted-foreground">Slug</dt><dd className="truncate">{n.slug}</dd>
+                </dl>
+                {src?.source_url && (
+                  <a href={src.source_url} target="_blank" rel="noreferrer" className="text-xs text-primary underline">
+                    Open source document
+                  </a>
+                )}
+              </div>
+            );
+          })()}
+        </DialogContent>
+      </Dialog>
 
       <section className="mb-4 rounded-md border border-border bg-card p-3">
         <div className="text-[11px] uppercase tracking-wider text-muted-foreground">
@@ -468,6 +541,11 @@ function SyllabusAdmin() {
               ["Orphans", "orphan_records"],
               ["Duplicate slugs", "duplicate_slugs"],
               ["Missing parents", "missing_parent_references"],
+              ["Duplicate names", "duplicate_semantic_nodes"],
+              ["Missing source", "missing_source"],
+              ["Missing page", "missing_source_page"],
+              ["Missing wording", "missing_original_wording"],
+              ["Not verified", "needs_review"],
             ].map(([label, key]) => (
               <div key={key}>
                 <dt className="text-xs text-muted-foreground">{label}</dt>
@@ -633,7 +711,8 @@ function SyllabusAdmin() {
                               <ChevronRight className="h-4 w-4" />
                             )}
                           </button>
-                          <span className="min-w-0 flex-1 truncate text-sm">{topic.name}</span>
+                          <span className="min-w-0 flex-1 truncate text-sm" title={topic.original_syllabus_wording ?? undefined}>{topic.name}</span>
+                          <SourceMeta node={topic} onOpen={() => setSourceView({ type: "topic", node: topic, path: subject.name })} />
                           <div className="flex items-center gap-1">
                             <button
                               className="rounded p-1.5 text-muted-foreground hover:bg-secondary"
@@ -700,9 +779,10 @@ function SyllabusAdmin() {
                             {subs.map((sub, subIndex) => (
                               <div key={sub.id} className="rounded-md border border-border p-2">
                                 <div className="flex items-center gap-2">
-                                  <span className="min-w-0 flex-1 truncate text-sm">
+                                  <span className="min-w-0 flex-1 truncate text-sm" title={sub.original_syllabus_wording ?? undefined}>
                                     {sub.name}
                                   </span>
+                                  <SourceMeta node={sub} onOpen={() => setSourceView({ type: "subtopic", node: sub, path: `${subject.name} › ${topic.name}` })} />
                                   <button
                                     className="rounded p-1.5 text-muted-foreground hover:bg-secondary"
                                     onClick={() => move("subtopic", subs, subIndex, -1)}
