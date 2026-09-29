@@ -279,7 +279,10 @@ function DocumentsPage() {
 
   async function openFile(path: string) {
     const { data, error } = await supabase.storage.from("source-documents").createSignedUrl(path, 300);
-    if (error) return toast.error(error.message);
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
     window.open(data.signedUrl, "_blank", "noopener");
   }
 
