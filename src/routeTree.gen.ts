@@ -21,6 +21,8 @@ import { Route as AuthenticatedRevisionRouteImport } from './routes/_authenticat
 import { Route as AuthenticatedRoadmapRouteImport } from './routes/_authenticated/roadmap'
 import { Route as AuthenticatedTodayRouteImport } from './routes/_authenticated/today'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin/index'
+import { Route as AuthenticatedAdminCollectionRunsRouteImport } from './routes/_authenticated/admin/collection-runs'
+import { Route as AuthenticatedAdminDocumentsRouteImport } from './routes/_authenticated/admin/documents'
 import { Route as AuthenticatedAdminExamsRouteImport } from './routes/_authenticated/admin/exams'
 import { Route as AuthenticatedAdminSourcesRouteImport } from './routes/_authenticated/admin/sources'
 import { Route as AuthenticatedAdminSyllabusRouteImport } from './routes/_authenticated/admin/syllabus'
@@ -84,6 +86,18 @@ const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AuthenticatedAdminRouteRoute,
 } as any)
+const AuthenticatedAdminCollectionRunsRoute =
+  AuthenticatedAdminCollectionRunsRouteImport.update({
+    id: '/collection-runs',
+    path: '/collection-runs',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminDocumentsRoute =
+  AuthenticatedAdminDocumentsRouteImport.update({
+    id: '/documents',
+    path: '/documents',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 const AuthenticatedAdminExamsRoute = AuthenticatedAdminExamsRouteImport.update({
   id: '/exams',
   path: '/exams',
@@ -113,6 +127,8 @@ export interface FileRoutesByFullPath {
   '/revision': typeof AuthenticatedRevisionRoute
   '/roadmap': typeof AuthenticatedRoadmapRoute
   '/today': typeof AuthenticatedTodayRoute
+  '/admin/collection-runs': typeof AuthenticatedAdminCollectionRunsRoute
+  '/admin/documents': typeof AuthenticatedAdminDocumentsRoute
   '/admin/exams': typeof AuthenticatedAdminExamsRoute
   '/admin/sources': typeof AuthenticatedAdminSourcesRoute
   '/admin/syllabus': typeof AuthenticatedAdminSyllabusRoute
@@ -128,6 +144,8 @@ export interface FileRoutesByTo {
   '/revision': typeof AuthenticatedRevisionRoute
   '/roadmap': typeof AuthenticatedRoadmapRoute
   '/today': typeof AuthenticatedTodayRoute
+  '/admin/collection-runs': typeof AuthenticatedAdminCollectionRunsRoute
+  '/admin/documents': typeof AuthenticatedAdminDocumentsRoute
   '/admin/exams': typeof AuthenticatedAdminExamsRoute
   '/admin/sources': typeof AuthenticatedAdminSourcesRoute
   '/admin/syllabus': typeof AuthenticatedAdminSyllabusRoute
@@ -146,6 +164,8 @@ export interface FileRoutesById {
   '/_authenticated/revision': typeof AuthenticatedRevisionRoute
   '/_authenticated/roadmap': typeof AuthenticatedRoadmapRoute
   '/_authenticated/today': typeof AuthenticatedTodayRoute
+  '/_authenticated/admin/collection-runs': typeof AuthenticatedAdminCollectionRunsRoute
+  '/_authenticated/admin/documents': typeof AuthenticatedAdminDocumentsRoute
   '/_authenticated/admin/exams': typeof AuthenticatedAdminExamsRoute
   '/_authenticated/admin/sources': typeof AuthenticatedAdminSourcesRoute
   '/_authenticated/admin/syllabus': typeof AuthenticatedAdminSyllabusRoute
@@ -164,6 +184,8 @@ export interface FileRouteTypes {
     | '/revision'
     | '/roadmap'
     | '/today'
+    | '/admin/collection-runs'
+    | '/admin/documents'
     | '/admin/exams'
     | '/admin/sources'
     | '/admin/syllabus'
@@ -179,6 +201,8 @@ export interface FileRouteTypes {
     | '/revision'
     | '/roadmap'
     | '/today'
+    | '/admin/collection-runs'
+    | '/admin/documents'
     | '/admin/exams'
     | '/admin/sources'
     | '/admin/syllabus'
@@ -196,6 +220,8 @@ export interface FileRouteTypes {
     | '/_authenticated/revision'
     | '/_authenticated/roadmap'
     | '/_authenticated/today'
+    | '/_authenticated/admin/collection-runs'
+    | '/_authenticated/admin/documents'
     | '/_authenticated/admin/exams'
     | '/_authenticated/admin/sources'
     | '/_authenticated/admin/syllabus'
@@ -294,6 +320,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
+    '/_authenticated/admin/collection-runs': {
+      id: '/_authenticated/admin/collection-runs'
+      path: '/collection-runs'
+      fullPath: '/admin/collection-runs'
+      preLoaderRoute: typeof AuthenticatedAdminCollectionRunsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/documents': {
+      id: '/_authenticated/admin/documents'
+      path: '/documents'
+      fullPath: '/admin/documents'
+      preLoaderRoute: typeof AuthenticatedAdminDocumentsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
     '/_authenticated/admin/exams': {
       id: '/_authenticated/admin/exams'
       path: '/exams'
@@ -319,6 +359,8 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedAdminRouteRouteChildren {
+  AuthenticatedAdminCollectionRunsRoute: typeof AuthenticatedAdminCollectionRunsRoute
+  AuthenticatedAdminDocumentsRoute: typeof AuthenticatedAdminDocumentsRoute
   AuthenticatedAdminExamsRoute: typeof AuthenticatedAdminExamsRoute
   AuthenticatedAdminSourcesRoute: typeof AuthenticatedAdminSourcesRoute
   AuthenticatedAdminSyllabusRoute: typeof AuthenticatedAdminSyllabusRoute
@@ -327,6 +369,9 @@ interface AuthenticatedAdminRouteRouteChildren {
 
 const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren =
   {
+    AuthenticatedAdminCollectionRunsRoute:
+      AuthenticatedAdminCollectionRunsRoute,
+    AuthenticatedAdminDocumentsRoute: AuthenticatedAdminDocumentsRoute,
     AuthenticatedAdminExamsRoute: AuthenticatedAdminExamsRoute,
     AuthenticatedAdminSourcesRoute: AuthenticatedAdminSourcesRoute,
     AuthenticatedAdminSyllabusRoute: AuthenticatedAdminSyllabusRoute,

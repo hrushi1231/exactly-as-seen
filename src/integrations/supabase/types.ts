@@ -14,6 +14,401 @@ export type Database = {
   }
   public: {
     Tables: {
+      candidate_links: {
+        Row: {
+          anchor_text: string | null
+          confidence: number
+          created_at: string
+          detected_file_type: string | null
+          document_id: string | null
+          exam_id: string | null
+          id: string
+          parent_page_url: string | null
+          possible_document_type: string | null
+          possible_year: number | null
+          run_id: string | null
+          source_domain_id: string | null
+          status: string
+          updated_at: string
+          url: string
+        }
+        Insert: {
+          anchor_text?: string | null
+          confidence?: number
+          created_at?: string
+          detected_file_type?: string | null
+          document_id?: string | null
+          exam_id?: string | null
+          id?: string
+          parent_page_url?: string | null
+          possible_document_type?: string | null
+          possible_year?: number | null
+          run_id?: string | null
+          source_domain_id?: string | null
+          status?: string
+          updated_at?: string
+          url: string
+        }
+        Update: {
+          anchor_text?: string | null
+          confidence?: number
+          created_at?: string
+          detected_file_type?: string | null
+          document_id?: string | null
+          exam_id?: string | null
+          id?: string
+          parent_page_url?: string | null
+          possible_document_type?: string | null
+          possible_year?: number | null
+          run_id?: string | null
+          source_domain_id?: string | null
+          status?: string
+          updated_at?: string
+          url?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "candidate_links_document_id_fkey"
+            columns: ["document_id"]
+            isOneToOne: false
+            referencedRelation: "documents"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "candidate_links_exam_id_fkey"
+            columns: ["exam_id"]
+            isOneToOne: false
+            referencedRelation: "exams"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "candidate_links_run_id_fkey"
+            columns: ["run_id"]
+            isOneToOne: false
+            referencedRelation: "collection_runs"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "candidate_links_source_domain_id_fkey"
+            columns: ["source_domain_id"]
+            isOneToOne: false
+            referencedRelation: "source_domains"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      collection_events: {
+        Row: {
+          created_at: string
+          document_id: string | null
+          id: string
+          level: string
+          message: string
+          run_id: string
+          url: string | null
+        }
+        Insert: {
+          created_at?: string
+          document_id?: string | null
+          id?: string
+          level?: string
+          message: string
+          run_id: string
+          url?: string | null
+        }
+        Update: {
+          created_at?: string
+          document_id?: string | null
+          id?: string
+          level?: string
+          message?: string
+          run_id?: string
+          url?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "collection_events_document_id_fkey"
+            columns: ["document_id"]
+            isOneToOne: false
+            referencedRelation: "documents"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "collection_events_run_id_fkey"
+            columns: ["run_id"]
+            isOneToOne: false
+            referencedRelation: "collection_runs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      collection_runs: {
+        Row: {
+          created_at: string
+          document_id: string | null
+          documents_created: number
+          documents_updated: number
+          duplicates_detected: number
+          errors: number
+          files_downloaded: number
+          finished_at: string | null
+          id: string
+          links_discovered: number
+          source_domain_id: string | null
+          started_at: string
+          status: string
+          strategy: string
+          target_url: string | null
+          triggered_by: string | null
+        }
+        Insert: {
+          created_at?: string
+          document_id?: string | null
+          documents_created?: number
+          documents_updated?: number
+          duplicates_detected?: number
+          errors?: number
+          files_downloaded?: number
+          finished_at?: string | null
+          id?: string
+          links_discovered?: number
+          source_domain_id?: string | null
+          started_at?: string
+          status?: string
+          strategy: string
+          target_url?: string | null
+          triggered_by?: string | null
+        }
+        Update: {
+          created_at?: string
+          document_id?: string | null
+          documents_created?: number
+          documents_updated?: number
+          duplicates_detected?: number
+          errors?: number
+          files_downloaded?: number
+          finished_at?: string | null
+          id?: string
+          links_discovered?: number
+          source_domain_id?: string | null
+          started_at?: string
+          status?: string
+          strategy?: string
+          target_url?: string | null
+          triggered_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "collection_runs_document_id_fkey"
+            columns: ["document_id"]
+            isOneToOne: false
+            referencedRelation: "documents"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "collection_runs_source_domain_id_fkey"
+            columns: ["source_domain_id"]
+            isOneToOne: false
+            referencedRelation: "source_domains"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      document_files: {
+        Row: {
+          created_at: string
+          document_id: string
+          file_size: number | null
+          id: string
+          mime_type: string | null
+          original_filename: string | null
+          page_count: number | null
+          sha256: string
+          storage_path: string
+          text_extractable: boolean | null
+        }
+        Insert: {
+          created_at?: string
+          document_id: string
+          file_size?: number | null
+          id?: string
+          mime_type?: string | null
+          original_filename?: string | null
+          page_count?: number | null
+          sha256: string
+          storage_path: string
+          text_extractable?: boolean | null
+        }
+        Update: {
+          created_at?: string
+          document_id?: string
+          file_size?: number | null
+          id?: string
+          mime_type?: string | null
+          original_filename?: string | null
+          page_count?: number | null
+          sha256?: string
+          storage_path?: string
+          text_extractable?: boolean | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "document_files_document_id_fkey"
+            columns: ["document_id"]
+            isOneToOne: false
+            referencedRelation: "documents"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      document_provenance: {
+        Row: {
+          created_at: string
+          document_id: string
+          id: string
+          landing_page_url: string | null
+          notes: string | null
+          source_domain_id: string | null
+          url: string
+        }
+        Insert: {
+          created_at?: string
+          document_id: string
+          id?: string
+          landing_page_url?: string | null
+          notes?: string | null
+          source_domain_id?: string | null
+          url: string
+        }
+        Update: {
+          created_at?: string
+          document_id?: string
+          id?: string
+          landing_page_url?: string | null
+          notes?: string | null
+          source_domain_id?: string | null
+          url?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "document_provenance_document_id_fkey"
+            columns: ["document_id"]
+            isOneToOne: false
+            referencedRelation: "documents"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "document_provenance_source_domain_id_fkey"
+            columns: ["source_domain_id"]
+            isOneToOne: false
+            referencedRelation: "source_domains"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      documents: {
+        Row: {
+          authority_level: string
+          created_at: string
+          discovered_at: string
+          document_type: string
+          download_status: string
+          downloaded_at: string | null
+          duplicate_of_document_id: string | null
+          exam_id: string | null
+          file_size: number | null
+          id: string
+          landing_page_url: string | null
+          mime_type: string | null
+          post_name: string | null
+          publication_date: string | null
+          recruitment_cycle: string | null
+          sha256: string | null
+          source_domain_id: string | null
+          source_notes: string | null
+          source_url: string
+          subject: string | null
+          title: string
+          updated_at: string
+          verification_status: string
+          year: number | null
+        }
+        Insert: {
+          authority_level?: string
+          created_at?: string
+          discovered_at?: string
+          document_type?: string
+          download_status?: string
+          downloaded_at?: string | null
+          duplicate_of_document_id?: string | null
+          exam_id?: string | null
+          file_size?: number | null
+          id?: string
+          landing_page_url?: string | null
+          mime_type?: string | null
+          post_name?: string | null
+          publication_date?: string | null
+          recruitment_cycle?: string | null
+          sha256?: string | null
+          source_domain_id?: string | null
+          source_notes?: string | null
+          source_url: string
+          subject?: string | null
+          title: string
+          updated_at?: string
+          verification_status?: string
+          year?: number | null
+        }
+        Update: {
+          authority_level?: string
+          created_at?: string
+          discovered_at?: string
+          document_type?: string
+          download_status?: string
+          downloaded_at?: string | null
+          duplicate_of_document_id?: string | null
+          exam_id?: string | null
+          file_size?: number | null
+          id?: string
+          landing_page_url?: string | null
+          mime_type?: string | null
+          post_name?: string | null
+          publication_date?: string | null
+          recruitment_cycle?: string | null
+          sha256?: string | null
+          source_domain_id?: string | null
+          source_notes?: string | null
+          source_url?: string
+          subject?: string | null
+          title?: string
+          updated_at?: string
+          verification_status?: string
+          year?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "documents_duplicate_of_document_id_fkey"
+            columns: ["duplicate_of_document_id"]
+            isOneToOne: false
+            referencedRelation: "documents"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "documents_exam_id_fkey"
+            columns: ["exam_id"]
+            isOneToOne: false
+            referencedRelation: "exams"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "documents_source_domain_id_fkey"
+            columns: ["source_domain_id"]
+            isOneToOne: false
+            referencedRelation: "source_domains"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       exam_patterns: {
         Row: {
           created_at: string
@@ -192,6 +587,62 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      source_domains: {
+        Row: {
+          authority_level: string
+          base_url: string
+          crawl_notes: string | null
+          created_at: string
+          exam_id: string | null
+          id: string
+          is_active: boolean
+          name: string
+          organization: string | null
+          priority: string
+          robots_notes: string | null
+          source_type: string
+          updated_at: string
+        }
+        Insert: {
+          authority_level?: string
+          base_url: string
+          crawl_notes?: string | null
+          created_at?: string
+          exam_id?: string | null
+          id?: string
+          is_active?: boolean
+          name: string
+          organization?: string | null
+          priority?: string
+          robots_notes?: string | null
+          source_type?: string
+          updated_at?: string
+        }
+        Update: {
+          authority_level?: string
+          base_url?: string
+          crawl_notes?: string | null
+          created_at?: string
+          exam_id?: string | null
+          id?: string
+          is_active?: boolean
+          name?: string
+          organization?: string | null
+          priority?: string
+          robots_notes?: string | null
+          source_type?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "source_domains_exam_id_fkey"
+            columns: ["exam_id"]
+            isOneToOne: false
+            referencedRelation: "exams"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       subjects: {
         Row: {

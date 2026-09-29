@@ -8,3 +8,8 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+## Architecture rules
+- Collector fetch/parse logic lives in `src/lib/collector/strategies.server.ts` with no DB access — so it can move unchanged into an external Node.js worker (browser strategy) later.
+- Collector server functions run as the signed-in admin (RLS + explicit `has_role` check), never with the service-role client — keeps admin enforcement server-side.
+- Raw files are stored once per SHA-256 in the private `source-documents` bucket; extra sources become `document_provenance` rows — avoids duplicate physical copies.
