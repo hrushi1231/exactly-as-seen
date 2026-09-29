@@ -1,0 +1,354 @@
+# Computer Systems Architecture
+## Computer Organisation Basics | Basic organisation of a computer: CPU, memory, input/output units and their interconnection.
+- Functional units of a computer
+- Von Neumann architecture
+- Bus structure: data, address and control bus
+## Instruction Set and Addressing | Instruction formats, instruction types and addressing modes.
+- Instruction formats
+- Instruction types
+- Addressing modes
+## Central Processing Unit | CPU organisation, registers, ALU and control unit design.
+- General register organisation
+- Stack organisation
+- Arithmetic and logic unit
+- Hardwired and microprogrammed control
+## Memory Organisation | Memory hierarchy, main memory, cache and virtual memory.
+- Memory hierarchy
+- RAM and ROM types
+- Cache memory and mapping techniques
+- Virtual memory
+- Secondary storage devices
+## Input-Output Organisation | Peripheral devices, I/O interface and modes of data transfer.
+- Peripheral devices
+- I/O interface
+- Programmed I/O and interrupt-driven I/O
+- Direct memory access (DMA)
+## Parallel Processing | Pipelining and multiprocessor concepts.
+- Pipelining
+- Multiprocessor systems
+
+# Operating Systems
+## Operating System Fundamentals | Definition, functions and types of operating systems.
+- Functions of an operating system
+- Batch, multiprogramming and time-sharing systems
+- Real-time and distributed systems
+- System calls
+## Processes | Process concept, process states and process control block.
+- Process concept
+- Process states
+- Process control block
+- Threads
+## Scheduling | CPU scheduling mechanisms and strategies.
+- Scheduling mechanisms
+- Strategy selection
+- Non-pre-emptive scheduling
+- Pre-emptive scheduling
+## Synchronization Principles | Process synchronisation and communication.
+- Critical section
+- Semaphores
+- Monitors
+- Inter-process communication
+## Deadlocks | Deadlock model, prevention, avoidance and recovery.
+- Deadlock model
+- Prevention
+- Hold and wait
+- Circular wait
+- Pre-emption
+- Banker's Algorithm
+- Resource recovery
+## Memory Management | Allocation of main memory to processes.
+- Contiguous allocation
+- Paging
+- Segmentation
+- Virtual memory and demand paging
+- Page replacement algorithms
+## File Systems | File concepts, access methods and directory structures.
+- File concept and attributes
+- Access methods
+- Directory structure
+- Disk scheduling
+## Device Management | Management of I/O devices.
+- Device drivers
+- Buffering and spooling
+
+# Digital Electronics
+## Number Systems | Binary, octal, decimal and hexadecimal number systems and conversions.
+- Number system conversions
+- Binary arithmetic
+- Complements and signed numbers
+## Codes | Binary codes used in digital systems.
+- BCD, Excess-3 and Gray codes
+- ASCII and EBCDIC
+- Error detecting codes: parity
+## Boolean Algebra | Boolean laws and theorems.
+- Boolean postulates and laws
+- De Morgan's theorems
+- Canonical forms: SOP and POS
+- Simplification with Karnaugh maps
+## Logic Gates | Basic and universal gates.
+- Basic gates: AND, OR, NOT
+- Universal gates: NAND, NOR
+- XOR and XNOR gates
+- Implementation using universal gates
+## Combinational Circuits | Design of combinational logic.
+- Half and full adders
+- Half and full subtractors
+- Multiplexers and demultiplexers
+- Encoders and decoders
+## Sequential Circuits | Flip-flops, registers and counters.
+- Flip-flops: SR, JK, D, T
+- Registers and shift registers
+- Counters
+
+# Programming Fundamentals
+## Problem Solving | Problem-solving methodology.
+- Algorithms
+- Flowcharts
+- Pseudo-code
+- Decision tables
+## Programming Concepts | Basic programming building blocks.
+- Data types, constants and variables
+- Operators and expressions
+- Control structures: sequence, selection, iteration
+- Modular programming: procedures and functions
+## Programming Methodologies | Approaches to program development.
+- Top-down and bottom-up design
+- Structured programming
+- Object-oriented programming concepts
+## Program Development | Translation and debugging of programs.
+- Compilers, interpreters and assemblers
+- Types of errors
+- Testing and debugging
+- Documentation
+
+# Programming Tool — Visual Basic
+## Visual Basic Environment | Introduction to the Visual Basic IDE and event-driven programming.
+- Event-driven programming
+- IDE: toolbox, properties window, project explorer
+- Forms and controls
+## Visual Basic Language | Language elements of Visual Basic.
+- Data types, variables and constants
+- Operators
+- Decision structures
+- Loop structures
+- Arrays
+## Procedures and Functions | Sub procedures, function procedures and built-in functions.
+- Sub procedures
+- Function procedures
+- Built-in string, math and date functions
+## Controls and Events | Working with standard and ActiveX controls.
+- Standard controls
+- Properties, methods and events
+- Menus and dialog boxes
+- MDI forms
+## Database Connectivity in VB | Accessing databases from Visual Basic.
+- Data control
+- ADO and data-bound controls
+
+# Data Structures
+## Arrays | One- and two-dimensional arrays and their operations.
+- One-dimensional arrays
+- Two-dimensional arrays
+- Row-major and column-major address calculation
+## Searching | Searching techniques.
+- Linear search
+- Binary search
+## Sorting | Sorting techniques.
+- Selection sort
+- Bubble sort
+- Insertion sort
+- Merge sort
+- Quick sort
+## Stacks | Stack operations and applications.
+- Stack using arrays
+- Stack using linked lists
+- Infix, prefix and postfix conversion
+- Evaluation of postfix expressions
+## Queues | Queue operations and variants.
+- Queue using arrays
+- Queue using linked lists
+- Circular queue
+## Linked Lists | Dynamic data structures with pointers.
+- Singly linked list
+- Doubly linked list
+- Circular linked list
+## Trees | Tree terminology and binary trees.
+- Binary trees
+- Tree traversals
+- Binary search trees
+
+# Programming in C++
+## C++ Basics | Tokens, data types and I/O.
+- Character set and tokens
+- Data types and type conversion
+- Operators and expressions
+- Input/output streams
+## Flow of Control | Conditional and iterative statements.
+- if and switch statements
+- Loops: for, while, do-while
+- Jump statements
+## Functions | Defining and calling functions.
+- Function prototypes and calls
+- Call by value and call by reference
+- Default arguments and inline functions
+- Function overloading
+- Recursion
+## Structured Data Types | Arrays, strings, structures and user-defined types.
+- Arrays and strings
+- Structures
+- typedef, enum and #define
+## Object-Oriented Programming | Classes and objects.
+- Classes and objects
+- Access specifiers and data hiding
+- Constructors and destructors
+- Inheritance
+- Polymorphism and virtual functions
+## Pointers | Pointer concepts in C++.
+- Pointers and arrays
+- Dynamic memory allocation: new and delete
+- this pointer
+- Pointers to objects and structures
+## File Handling | Data file operations using streams.
+- Text files
+- Binary files
+- File pointers and random access
+
+# Relational Database Management System
+## Database Concepts | Basic database terminology.
+- Need for DBMS
+- Data abstraction and independence
+- Data models: hierarchical, network, relational
+## Relational Model | Relations, keys and relational algebra.
+- Relation, tuple, attribute, domain
+- Keys: primary, candidate, alternate, foreign
+- Relational algebra operations
+## Normalisation | Database design using normal forms.
+- Functional dependency
+- 1NF, 2NF and 3NF
+- BCNF
+## Entity-Relationship Model | Conceptual database design.
+- Entities, attributes and relationships
+- ER diagrams
+## SQL | Structured Query Language.
+- DDL commands
+- DML commands
+- Constraints
+- Aggregate functions and GROUP BY
+- Joins
+- Subqueries
+- Views
+## Oracle and SQL*Plus | Working with Oracle through SQL*Plus.
+- SQL*Plus environment and commands
+- Oracle data types
+## PL/SQL | Procedural extensions in Oracle.
+- PL/SQL block structure
+- Cursors
+- Procedures and functions
+- Triggers
+- Exception handling
+## Transactions | Transaction management and control.
+- ACID properties
+- COMMIT, ROLLBACK and SAVEPOINT
+- Concurrency control
+
+# Business Computing
+## Word Processing | Document preparation with a word processor.
+- Formatting documents
+- Tables and mail merge
+## Spreadsheets | Worksheet operations and analysis.
+- Formulas and functions
+- Charts
+- Data sorting and filtering
+## Presentation Software | Creating presentations.
+- Slides, layouts and templates
+- Animation and transitions
+## Business Applications | Computing in business.
+- Payroll, inventory and accounting applications
+- Management information systems
+- E-commerce concepts
+
+# Web Development
+## Internet and WWW | Internet fundamentals.
+- Internet services
+- Web browsers and web servers
+- URL, HTTP and domain names
+## HTML | Structuring web pages.
+- HTML document structure
+- Text formatting tags
+- Lists
+- Tables
+- Images and hyperlinks
+- Frames
+- Forms
+## DHTML | Dynamic HTML.
+- Cascading Style Sheets
+- Document Object Model
+- Dynamic content and positioning
+## XML | Extensible Markup Language.
+- XML document structure
+- DTD
+- Well-formed and valid documents
+- XML vs HTML
+
+# Web Scripting
+## Client-Side Scripting | Client-side scripting concepts.
+- Role of client-side scripts
+- JavaScript basics
+## VBScript | Scripting with VBScript.
+- VBScript data types and variables
+- Operators and control structures
+- Procedures and functions
+- Handling form events
+## ASP | Active Server Pages.
+- ASP architecture
+- Request and Response objects
+- Session and Application objects
+- Server object and cookies
+- Database access with ADO
+
+# Multimedia and Authoring Tools
+## Multimedia Concepts | Elements and applications of multimedia.
+- Text, graphics, audio, video and animation
+- Multimedia applications
+- File formats and compression
+## Image Editing | Working with images.
+- Raster and vector graphics
+- Image editing tools
+## Macromedia Flash | Animation authoring with Flash.
+- Flash interface: stage, timeline, layers
+- Symbols and instances
+- Motion and shape tweening
+- ActionScript basics
+## Authoring Tools | Multimedia authoring.
+- Types of authoring tools
+- Publishing multimedia content
+
+# Communication and Network Concepts
+## Evolution of Networking | Origins of computer networks.
+- ARPANET and the Internet
+- Interspace
+## Data Communication | Data communication fundamentals.
+- Bandwidth and data transfer rate
+- Transmission media: guided
+- Transmission media: unguided
+- Switching techniques
+## Network Devices | Hardware used in networks.
+- Modem
+- Hub, switch and repeater
+- Router, bridge and gateway
+## Network Types and Topologies | Classification of networks.
+- LAN, MAN, WAN and PAN
+- Bus, star, ring and tree topologies
+## Network Protocols | Protocols and models.
+- OSI reference model
+- TCP/IP
+- HTTP, FTP, SMTP and POP
+- Wireless and mobile communication: GSM, CDMA
+## Network Security | Threats and protection.
+- Viruses and malware
+- Firewalls
+- Cyber law and IT Act
+- Cookies and hacking
+## Web Services | Web-based services.
+- WWW, web hosting
+- Open source concepts
