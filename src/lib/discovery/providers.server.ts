@@ -53,6 +53,28 @@ export class FirecrawlDiscoveryProvider implements DiscoveryProvider {
   }
 }
 
+/** Firecrawl page scrape (used only as a fallback when static fetch is blocked/JS-only). */
+export async function firecrawlScrape(url: string): Promise<{ markdown: string; title: string | null; links: string[]; status: number | null } | null> {
+  const lovable = process.env["LOVABLE_API_KEY"];
+  const fc = process.env["FIRECRAWL_API_KEY"];
+  if (!lovable || !fc) return null;
+  let res: Response;
+  for (let attempt = 0; ; attempt++) {
+    res = await fetch(`${GATEWAY}/scrape`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${lovable}`, "X-Connection-Api-Key": fc },
+      body: JSON.stringify({ url, formats: ["markdown", "links"], onlyMainContent: true, timeout: 30000 }),
+    });
+    if (res.status !== 429 || attempt >= 2) break;
+    await new Promise((r) => setTimeout(r, 20_000 + Math.random() * 10_000));
+  }
+  if (!res.ok) throw new Error(`Firecrawl scrape failed [${res.status}]: ${(await res.text()).slice(0, 200)}`);
+  const j = (await res.json()) as { data?: { markdown?: string; links?: string[]; metadata?: { title?: string; statusCode?: number } } };
+  const d = j.data;
+  if (!d) return null;
+  return { markdown: d.markdown ?? "", title: d.metadata?.title ?? null, links: d.links ?? [], status: d.metadata?.statusCode ?? null };
+}
+
 const POST_NAMES: Record<PostType, string[]> = {
   pgt_computer_science: ["OAVS PGT Computer Science", "OAVS PGT Comp Sc", "OAVS PGT CS"],
   computer_teacher: ["OAVS Computer Teacher", "OAVS Computer Science Teacher"],
