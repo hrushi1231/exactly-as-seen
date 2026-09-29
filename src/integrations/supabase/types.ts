@@ -214,6 +214,140 @@ export type Database = {
           },
         ]
       }
+      discovery_candidates: {
+        Row: {
+          artifact_type_guess: string
+          authority_guess: string
+          canonical_url: string
+          confidence: number
+          cycle_ids: string[]
+          discovered_at: string
+          discovery_queries: string[]
+          document_id: string | null
+          exam_id: string | null
+          id: string
+          is_downloadable: boolean
+          post_type_guess: string
+          provider: string
+          snippet: string | null
+          source_domain: string
+          source_kind: string
+          status: string
+          title: string | null
+          updated_at: string
+          url: string
+          video_channel: string | null
+          video_published_at: string | null
+          year_guess: number | null
+        }
+        Insert: {
+          artifact_type_guess?: string
+          authority_guess?: string
+          canonical_url: string
+          confidence?: number
+          cycle_ids?: string[]
+          discovered_at?: string
+          discovery_queries?: string[]
+          document_id?: string | null
+          exam_id?: string | null
+          id?: string
+          is_downloadable?: boolean
+          post_type_guess?: string
+          provider: string
+          snippet?: string | null
+          source_domain: string
+          source_kind?: string
+          status?: string
+          title?: string | null
+          updated_at?: string
+          url: string
+          video_channel?: string | null
+          video_published_at?: string | null
+          year_guess?: number | null
+        }
+        Update: {
+          artifact_type_guess?: string
+          authority_guess?: string
+          canonical_url?: string
+          confidence?: number
+          cycle_ids?: string[]
+          discovered_at?: string
+          discovery_queries?: string[]
+          document_id?: string | null
+          exam_id?: string | null
+          id?: string
+          is_downloadable?: boolean
+          post_type_guess?: string
+          provider?: string
+          snippet?: string | null
+          source_domain?: string
+          source_kind?: string
+          status?: string
+          title?: string | null
+          updated_at?: string
+          url?: string
+          video_channel?: string | null
+          video_published_at?: string | null
+          year_guess?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "discovery_candidates_document_id_fkey"
+            columns: ["document_id"]
+            isOneToOne: false
+            referencedRelation: "documents"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "discovery_candidates_exam_id_fkey"
+            columns: ["exam_id"]
+            isOneToOne: false
+            referencedRelation: "exams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      discovery_queries: {
+        Row: {
+          cycle_id: string
+          error: string | null
+          id: string
+          provider: string
+          query: string
+          query_kind: string
+          ran_at: string
+          result_count: number
+        }
+        Insert: {
+          cycle_id: string
+          error?: string | null
+          id?: string
+          provider: string
+          query: string
+          query_kind: string
+          ran_at?: string
+          result_count?: number
+        }
+        Update: {
+          cycle_id?: string
+          error?: string | null
+          id?: string
+          provider?: string
+          query?: string
+          query_kind?: string
+          ran_at?: string
+          result_count?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "discovery_queries_cycle_id_fkey"
+            columns: ["cycle_id"]
+            isOneToOne: false
+            referencedRelation: "pyq_research_cycles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       document_files: {
         Row: {
           created_at: string
@@ -321,6 +455,7 @@ export type Database = {
           landing_page_url: string | null
           mime_type: string | null
           post_name: string | null
+          post_type: string | null
           publication_date: string | null
           recruitment_cycle: string | null
           sha256: string | null
@@ -347,6 +482,7 @@ export type Database = {
           landing_page_url?: string | null
           mime_type?: string | null
           post_name?: string | null
+          post_type?: string | null
           publication_date?: string | null
           recruitment_cycle?: string | null
           sha256?: string | null
@@ -373,6 +509,7 @@ export type Database = {
           landing_page_url?: string | null
           mime_type?: string | null
           post_name?: string | null
+          post_type?: string | null
           publication_date?: string | null
           recruitment_cycle?: string | null
           sha256?: string | null
@@ -587,6 +724,77 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      pyq_research_cycles: {
+        Row: {
+          answer_key_found: boolean
+          candidate_count: number
+          created_at: string
+          evidence_status: string
+          exam_id: string
+          id: string
+          last_searched_at: string | null
+          notes: string | null
+          official_candidates: number
+          paper_found: boolean
+          post_type: string
+          queries_run: number
+          response_sheet_found: boolean
+          search_status: string
+          secondary_candidates: number
+          updated_at: string
+          video_candidates: number
+          year: number
+        }
+        Insert: {
+          answer_key_found?: boolean
+          candidate_count?: number
+          created_at?: string
+          evidence_status?: string
+          exam_id: string
+          id?: string
+          last_searched_at?: string | null
+          notes?: string | null
+          official_candidates?: number
+          paper_found?: boolean
+          post_type: string
+          queries_run?: number
+          response_sheet_found?: boolean
+          search_status?: string
+          secondary_candidates?: number
+          updated_at?: string
+          video_candidates?: number
+          year: number
+        }
+        Update: {
+          answer_key_found?: boolean
+          candidate_count?: number
+          created_at?: string
+          evidence_status?: string
+          exam_id?: string
+          id?: string
+          last_searched_at?: string | null
+          notes?: string | null
+          official_candidates?: number
+          paper_found?: boolean
+          post_type?: string
+          queries_run?: number
+          response_sheet_found?: boolean
+          search_status?: string
+          secondary_candidates?: number
+          updated_at?: string
+          video_candidates?: number
+          year?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pyq_research_cycles_exam_id_fkey"
+            columns: ["exam_id"]
+            isOneToOne: false
+            referencedRelation: "exams"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       source_domains: {
         Row: {
