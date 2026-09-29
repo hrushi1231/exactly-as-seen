@@ -266,7 +266,8 @@ function SyllabusAdmin() {
     .filter(
       ({ subject, topics: entries }) =>
         entries.length > 0 ||
-        ((matches(subject.name) || !term) &&
+        (statusFilter === "all" &&
+          (matches(subject.name) || !term) &&
           (examFilter === "all" || passesExam("subject", subject.id))),
     );
 
