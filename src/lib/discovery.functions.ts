@@ -64,17 +64,25 @@ export const runCycleDiscovery = auth
     const provider: DiscoveryProvider = new FirecrawlDiscoveryProvider();
     const planned = planQueries(post, cycle.year);
     const results: { query: string; kind: string; hits: Awaited<ReturnType<DiscoveryProvider["search"]>>; error?: string }[] = [];
-    for (let i = 0; i < planned.length; i += 4) {
-      const batch = await Promise.all(
-        planned.slice(i, i + 4).map(async (p) => {
-          try {
-            return { ...p, hits: await provider.search(p.query, { limit: 10 }) };
-          } catch (e) {
-            return { ...p, hits: [], error: (e as Error).message };
+    // Serial with a short gap; Firecrawl plans are rate limited per minute.
+    for (const p of planned) {
+      let attempt = 0;
+      for (;;) {
+        try {
+          results.push({ ...p, hits: await provider.search(p.query, { limit: 10 }) });
+          break;
+        } catch (e) {
+          const msg = (e as Error).message;
+          if (/\[429\]/.test(msg) && attempt < 2) {
+            attempt++;
+            await new Promise((r) => setTimeout(r, 30_000));
+            continue;
           }
-        }),
-      );
-      results.push(...batch);
+          results.push({ ...p, hits: [], error: msg });
+          break;
+        }
+      }
+      await new Promise((r) => setTimeout(r, 1200));
     }
 
     await supabase.from("discovery_queries").insert(
@@ -156,6 +164,8 @@ export const runCycleDiscovery = auth
       .from("pyq_research_cycles")
       .update({
         ...stats,
+        // If every search failed we learned nothing: keep evidence unknown.
+        ...(failed === results.length ? { evidence_status: "unknown" } : {}),
         queries_run: cycle.queries_run + results.length,
         // One automated pass is never "exhaustive"; an admin confirms that.
         search_status: failed ? "partial" : "needs_review",
