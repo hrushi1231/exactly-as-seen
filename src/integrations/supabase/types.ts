@@ -200,11 +200,14 @@ export type Database = {
           display_order: number
           id: string
           name: string
+          original_syllabus_wording: string | null
           slug: string
           source_id: string | null
+          source_page: number | null
           source_text: string | null
           status: string
           updated_at: string
+          verification_status: string
         }
         Insert: {
           created_at?: string
@@ -212,11 +215,14 @@ export type Database = {
           display_order?: number
           id?: string
           name: string
+          original_syllabus_wording?: string | null
           slug: string
           source_id?: string | null
+          source_page?: number | null
           source_text?: string | null
           status?: string
           updated_at?: string
+          verification_status?: string
         }
         Update: {
           created_at?: string
@@ -224,11 +230,14 @@ export type Database = {
           display_order?: number
           id?: string
           name?: string
+          original_syllabus_wording?: string | null
           slug?: string
           source_id?: string | null
+          source_page?: number | null
           source_text?: string | null
           status?: string
           updated_at?: string
+          verification_status?: string
         }
         Relationships: [
           {
@@ -248,12 +257,15 @@ export type Database = {
           estimated_minutes: number | null
           id: string
           name: string
+          original_syllabus_wording: string | null
           slug: string
           source_id: string | null
+          source_page: number | null
           source_text: string | null
           status: string
           topic_id: string
           updated_at: string
+          verification_status: string
         }
         Insert: {
           created_at?: string
@@ -262,12 +274,15 @@ export type Database = {
           estimated_minutes?: number | null
           id?: string
           name: string
+          original_syllabus_wording?: string | null
           slug: string
           source_id?: string | null
+          source_page?: number | null
           source_text?: string | null
           status?: string
           topic_id: string
           updated_at?: string
+          verification_status?: string
         }
         Update: {
           created_at?: string
@@ -276,12 +291,15 @@ export type Database = {
           estimated_minutes?: number | null
           id?: string
           name?: string
+          original_syllabus_wording?: string | null
           slug?: string
           source_id?: string | null
+          source_page?: number | null
           source_text?: string | null
           status?: string
           topic_id?: string
           updated_at?: string
+          verification_status?: string
         }
         Relationships: [
           {
@@ -353,13 +371,17 @@ export type Database = {
           estimated_minutes: number | null
           id: string
           name: string
+          original_syllabus_wording: string | null
           parent_topic_id: string | null
           slug: string
           source_id: string | null
+          source_page: number | null
+          source_page_end: number | null
           source_text: string | null
           status: string
           subject_id: string
           updated_at: string
+          verification_status: string
         }
         Insert: {
           created_at?: string
@@ -368,13 +390,17 @@ export type Database = {
           estimated_minutes?: number | null
           id?: string
           name: string
+          original_syllabus_wording?: string | null
           parent_topic_id?: string | null
           slug: string
           source_id?: string | null
+          source_page?: number | null
+          source_page_end?: number | null
           source_text?: string | null
           status?: string
           subject_id: string
           updated_at?: string
+          verification_status?: string
         }
         Update: {
           created_at?: string
@@ -383,13 +409,17 @@ export type Database = {
           estimated_minutes?: number | null
           id?: string
           name?: string
+          original_syllabus_wording?: string | null
           parent_topic_id?: string | null
           slug?: string
           source_id?: string | null
+          source_page?: number | null
+          source_page_end?: number | null
           source_text?: string | null
           status?: string
           subject_id?: string
           updated_at?: string
+          verification_status?: string
         }
         Relationships: [
           {
