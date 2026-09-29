@@ -1,6 +1,13 @@
 import { supabase } from "@/integrations/supabase/client";
 
 export type EntityType = "subject" | "topic" | "subtopic";
+export type VerificationStatus = "unverified" | "verified" | "needs_review";
+
+export const VERIFICATION_LABEL: Record<VerificationStatus, string> = {
+  verified: "Verified against Annexure-VI",
+  unverified: "Unverified",
+  needs_review: "Needs review",
+};
 
 export interface Exam {
   id: string;
@@ -23,12 +30,16 @@ export interface Subject {
   status: string;
   source_id: string | null;
   source_text: string | null;
+  original_syllabus_wording: string | null;
+  source_page: number | null;
+  verification_status: VerificationStatus;
 }
 
 export interface Topic {
   id: string;
   subject_id: string;
   parent_topic_id: string | null;
+  source_page_end: number | null;
   name: string;
   slug: string;
   description: string | null;
@@ -37,6 +48,9 @@ export interface Topic {
   status: string;
   source_id: string | null;
   source_text: string | null;
+  original_syllabus_wording: string | null;
+  source_page: number | null;
+  verification_status: VerificationStatus;
 }
 
 export interface Subtopic {
@@ -50,6 +64,9 @@ export interface Subtopic {
   status: string;
   source_id: string | null;
   source_text: string | null;
+  original_syllabus_wording: string | null;
+  source_page: number | null;
+  verification_status: VerificationStatus;
 }
 
 export interface Mapping {
