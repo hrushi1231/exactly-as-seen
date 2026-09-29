@@ -1,0 +1,7 @@
+yt-dlp
+faster-whisper
+rapidocr
+onnxruntime
+opencv-contrib-python-headless
+requests
+pillow

@@ -702,6 +702,7 @@ export type Database = {
           display_order: number
           exam_date: string | null
           exam_id: string
+          exam_start_date: string | null
           exam_year: number | null
           id: string
           label: string
@@ -719,6 +720,7 @@ export type Database = {
           display_order?: number
           exam_date?: string | null
           exam_id: string
+          exam_start_date?: string | null
           exam_year?: number | null
           id?: string
           label: string
@@ -736,6 +738,7 @@ export type Database = {
           display_order?: number
           exam_date?: string | null
           exam_id?: string
+          exam_start_date?: string | null
           exam_year?: number | null
           id?: string
           label?: string
@@ -920,6 +923,7 @@ export type Database = {
           id: string
           post_type: string
           quality_level: string
+          question_id: string | null
           reason: string | null
           title: string | null
           updated_at: string
@@ -935,6 +939,7 @@ export type Database = {
           id?: string
           post_type: string
           quality_level: string
+          question_id?: string | null
           reason?: string | null
           title?: string | null
           updated_at?: string
@@ -950,6 +955,7 @@ export type Database = {
           id?: string
           post_type?: string
           quality_level?: string
+          question_id?: string | null
           reason?: string | null
           title?: string | null
           updated_at?: string
@@ -976,6 +982,13 @@ export type Database = {
             columns: ["document_id"]
             isOneToOne: false
             referencedRelation: "documents"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "gold_corpus_question_id_fkey"
+            columns: ["question_id"]
+            isOneToOne: false
+            referencedRelation: "questions"
             referencedColumns: ["id"]
           },
         ]
@@ -1071,6 +1084,299 @@ export type Database = {
             columns: ["exam_id"]
             isOneToOne: false
             referencedRelation: "exams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      question_evidence: {
+        Row: {
+          confidence: number | null
+          created_at: string
+          document_id: string | null
+          evidence_type: string
+          id: string
+          meta: Json
+          normalized_text: string | null
+          occurrence_id: string | null
+          question_id: string
+          raw_text: string
+          source_url: string
+          timestamp_end: number | null
+          timestamp_start: number | null
+          video_source_id: string | null
+        }
+        Insert: {
+          confidence?: number | null
+          created_at?: string
+          document_id?: string | null
+          evidence_type: string
+          id?: string
+          meta?: Json
+          normalized_text?: string | null
+          occurrence_id?: string | null
+          question_id: string
+          raw_text: string
+          source_url: string
+          timestamp_end?: number | null
+          timestamp_start?: number | null
+          video_source_id?: string | null
+        }
+        Update: {
+          confidence?: number | null
+          created_at?: string
+          document_id?: string | null
+          evidence_type?: string
+          id?: string
+          meta?: Json
+          normalized_text?: string | null
+          occurrence_id?: string | null
+          question_id?: string
+          raw_text?: string
+          source_url?: string
+          timestamp_end?: number | null
+          timestamp_start?: number | null
+          video_source_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "question_evidence_document_id_fkey"
+            columns: ["document_id"]
+            isOneToOne: false
+            referencedRelation: "documents"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "question_evidence_occurrence_id_fkey"
+            columns: ["occurrence_id"]
+            isOneToOne: false
+            referencedRelation: "question_occurrences"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "question_evidence_question_id_fkey"
+            columns: ["question_id"]
+            isOneToOne: false
+            referencedRelation: "questions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "question_evidence_video_source_id_fkey"
+            columns: ["video_source_id"]
+            isOneToOne: false
+            referencedRelation: "video_sources"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      question_occurrences: {
+        Row: {
+          confidence: number
+          created_at: string
+          exam_id: string
+          exam_year: number | null
+          id: string
+          post_type: string
+          question_id: string
+          question_number: number | null
+          resolved_cycle_id: string | null
+          source_timestamp_end: number | null
+          source_timestamp_start: number
+          source_video_id: string
+          subject_id: string | null
+          subtopic_id: string | null
+          topic_id: string | null
+          verification_status: string
+        }
+        Insert: {
+          confidence?: number
+          created_at?: string
+          exam_id: string
+          exam_year?: number | null
+          id?: string
+          post_type: string
+          question_id: string
+          question_number?: number | null
+          resolved_cycle_id?: string | null
+          source_timestamp_end?: number | null
+          source_timestamp_start: number
+          source_video_id: string
+          subject_id?: string | null
+          subtopic_id?: string | null
+          topic_id?: string | null
+          verification_status?: string
+        }
+        Update: {
+          confidence?: number
+          created_at?: string
+          exam_id?: string
+          exam_year?: number | null
+          id?: string
+          post_type?: string
+          question_id?: string
+          question_number?: number | null
+          resolved_cycle_id?: string | null
+          source_timestamp_end?: number | null
+          source_timestamp_start?: number
+          source_video_id?: string
+          subject_id?: string | null
+          subtopic_id?: string | null
+          topic_id?: string | null
+          verification_status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "question_occurrences_exam_id_fkey"
+            columns: ["exam_id"]
+            isOneToOne: false
+            referencedRelation: "exams"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "question_occurrences_question_id_fkey"
+            columns: ["question_id"]
+            isOneToOne: false
+            referencedRelation: "questions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "question_occurrences_resolved_cycle_id_fkey"
+            columns: ["resolved_cycle_id"]
+            isOneToOne: false
+            referencedRelation: "exam_cycles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "question_occurrences_source_video_id_fkey"
+            columns: ["source_video_id"]
+            isOneToOne: false
+            referencedRelation: "video_sources"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "question_occurrences_subject_id_fkey"
+            columns: ["subject_id"]
+            isOneToOne: false
+            referencedRelation: "subjects"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "question_occurrences_subtopic_id_fkey"
+            columns: ["subtopic_id"]
+            isOneToOne: false
+            referencedRelation: "subtopics"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "question_occurrences_topic_id_fkey"
+            columns: ["topic_id"]
+            isOneToOne: false
+            referencedRelation: "topics"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      question_options: {
+        Row: {
+          display_order: number
+          id: string
+          is_presented_answer: boolean
+          label: string
+          option_text: string
+          question_id: string
+          raw_text: string | null
+        }
+        Insert: {
+          display_order?: number
+          id?: string
+          is_presented_answer?: boolean
+          label: string
+          option_text: string
+          question_id: string
+          raw_text?: string | null
+        }
+        Update: {
+          display_order?: number
+          id?: string
+          is_presented_answer?: boolean
+          label?: string
+          option_text?: string
+          question_id?: string
+          raw_text?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "question_options_question_id_fkey"
+            columns: ["question_id"]
+            isOneToOne: false
+            referencedRelation: "questions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      questions: {
+        Row: {
+          answer_label: string | null
+          answer_status: string
+          confidence: number
+          created_at: string
+          id: string
+          language: string
+          merged_into_id: string | null
+          normalization_status: string
+          pyq_claim: string
+          quality_flags: string[]
+          question_text: string
+          question_type: string
+          reviewed_at: string | null
+          reviewed_by: string | null
+          source_text: string
+          updated_at: string
+          verification_status: string
+        }
+        Insert: {
+          answer_label?: string | null
+          answer_status?: string
+          confidence?: number
+          created_at?: string
+          id?: string
+          language?: string
+          merged_into_id?: string | null
+          normalization_status?: string
+          pyq_claim?: string
+          quality_flags?: string[]
+          question_text: string
+          question_type?: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          source_text: string
+          updated_at?: string
+          verification_status?: string
+        }
+        Update: {
+          answer_label?: string | null
+          answer_status?: string
+          confidence?: number
+          created_at?: string
+          id?: string
+          language?: string
+          merged_into_id?: string | null
+          normalization_status?: string
+          pyq_claim?: string
+          quality_flags?: string[]
+          question_text?: string
+          question_type?: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          source_text?: string
+          updated_at?: string
+          verification_status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "questions_merged_into_id_fkey"
+            columns: ["merged_into_id"]
+            isOneToOne: false
+            referencedRelation: "questions"
             referencedColumns: ["id"]
           },
         ]
@@ -1436,6 +1742,167 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      video_processing_runs: {
+        Row: {
+          candidates_found: number
+          error: string | null
+          finished_at: string | null
+          frames_candidate: number
+          frames_ocr: number
+          id: string
+          started_at: string
+          status: string
+          steps: Json
+          transcript_language: string | null
+          transcript_source: string | null
+          video_source_id: string
+          worker_version: string
+        }
+        Insert: {
+          candidates_found?: number
+          error?: string | null
+          finished_at?: string | null
+          frames_candidate?: number
+          frames_ocr?: number
+          id?: string
+          started_at?: string
+          status?: string
+          steps?: Json
+          transcript_language?: string | null
+          transcript_source?: string | null
+          video_source_id: string
+          worker_version: string
+        }
+        Update: {
+          candidates_found?: number
+          error?: string | null
+          finished_at?: string | null
+          frames_candidate?: number
+          frames_ocr?: number
+          id?: string
+          started_at?: string
+          status?: string
+          steps?: Json
+          transcript_language?: string | null
+          transcript_source?: string | null
+          video_source_id?: string
+          worker_version?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "video_processing_runs_video_source_id_fkey"
+            columns: ["video_source_id"]
+            isOneToOne: false
+            referencedRelation: "video_sources"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      video_sources: {
+        Row: {
+          auto_caption_languages: string[]
+          candidate_id: string | null
+          canonical_url: string
+          caption_languages: string[]
+          captions_available: boolean | null
+          channel: string | null
+          channel_id: string | null
+          claimed_exam_year: number | null
+          claimed_exam_year_evidence: string | null
+          created_at: string
+          description: string | null
+          duration_seconds: number | null
+          exam_year_confidence: string
+          exam_year_evidence: string | null
+          id: string
+          metadata_error: string | null
+          metadata_status: string
+          post_type: string
+          processing_status: string
+          pyq_claim: string
+          pyq_claim_evidence: string | null
+          resolved_cycle_id: string | null
+          thumbnail_url: string | null
+          title: string | null
+          updated_at: string
+          video_id: string
+          video_publish_date: string | null
+        }
+        Insert: {
+          auto_caption_languages?: string[]
+          candidate_id?: string | null
+          canonical_url: string
+          caption_languages?: string[]
+          captions_available?: boolean | null
+          channel?: string | null
+          channel_id?: string | null
+          claimed_exam_year?: number | null
+          claimed_exam_year_evidence?: string | null
+          created_at?: string
+          description?: string | null
+          duration_seconds?: number | null
+          exam_year_confidence?: string
+          exam_year_evidence?: string | null
+          id?: string
+          metadata_error?: string | null
+          metadata_status?: string
+          post_type: string
+          processing_status?: string
+          pyq_claim?: string
+          pyq_claim_evidence?: string | null
+          resolved_cycle_id?: string | null
+          thumbnail_url?: string | null
+          title?: string | null
+          updated_at?: string
+          video_id: string
+          video_publish_date?: string | null
+        }
+        Update: {
+          auto_caption_languages?: string[]
+          candidate_id?: string | null
+          canonical_url?: string
+          caption_languages?: string[]
+          captions_available?: boolean | null
+          channel?: string | null
+          channel_id?: string | null
+          claimed_exam_year?: number | null
+          claimed_exam_year_evidence?: string | null
+          created_at?: string
+          description?: string | null
+          duration_seconds?: number | null
+          exam_year_confidence?: string
+          exam_year_evidence?: string | null
+          id?: string
+          metadata_error?: string | null
+          metadata_status?: string
+          post_type?: string
+          processing_status?: string
+          pyq_claim?: string
+          pyq_claim_evidence?: string | null
+          resolved_cycle_id?: string | null
+          thumbnail_url?: string | null
+          title?: string | null
+          updated_at?: string
+          video_id?: string
+          video_publish_date?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "video_sources_candidate_id_fkey"
+            columns: ["candidate_id"]
+            isOneToOne: false
+            referencedRelation: "discovery_candidates"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "video_sources_resolved_cycle_id_fkey"
+            columns: ["resolved_cycle_id"]
+            isOneToOne: false
+            referencedRelation: "exam_cycles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {

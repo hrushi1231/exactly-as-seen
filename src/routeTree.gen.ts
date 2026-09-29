@@ -27,6 +27,7 @@ import { Route as AuthenticatedAdminExamsRouteImport } from './routes/_authentic
 import { Route as AuthenticatedAdminPyqDiscoveryRouteImport } from './routes/_authenticated/admin/pyq-discovery'
 import { Route as AuthenticatedAdminSourcesRouteImport } from './routes/_authenticated/admin/sources'
 import { Route as AuthenticatedAdminSyllabusRouteImport } from './routes/_authenticated/admin/syllabus'
+import { Route as AuthenticatedAdminVideoReconstructionRouteImport } from './routes/_authenticated/admin/video-reconstruction'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -122,6 +123,12 @@ const AuthenticatedAdminSyllabusRoute =
     path: '/syllabus',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
+const AuthenticatedAdminVideoReconstructionRoute =
+  AuthenticatedAdminVideoReconstructionRouteImport.update({
+    id: '/video-reconstruction',
+    path: '/video-reconstruction',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -140,6 +147,7 @@ export interface FileRoutesByFullPath {
   '/admin/pyq-discovery': typeof AuthenticatedAdminPyqDiscoveryRoute
   '/admin/sources': typeof AuthenticatedAdminSourcesRoute
   '/admin/syllabus': typeof AuthenticatedAdminSyllabusRoute
+  '/admin/video-reconstruction': typeof AuthenticatedAdminVideoReconstructionRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRoutesByTo {
@@ -158,6 +166,7 @@ export interface FileRoutesByTo {
   '/admin/pyq-discovery': typeof AuthenticatedAdminPyqDiscoveryRoute
   '/admin/sources': typeof AuthenticatedAdminSourcesRoute
   '/admin/syllabus': typeof AuthenticatedAdminSyllabusRoute
+  '/admin/video-reconstruction': typeof AuthenticatedAdminVideoReconstructionRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRoutesById {
@@ -179,6 +188,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/pyq-discovery': typeof AuthenticatedAdminPyqDiscoveryRoute
   '/_authenticated/admin/sources': typeof AuthenticatedAdminSourcesRoute
   '/_authenticated/admin/syllabus': typeof AuthenticatedAdminSyllabusRoute
+  '/_authenticated/admin/video-reconstruction': typeof AuthenticatedAdminVideoReconstructionRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRouteTypes {
@@ -200,6 +210,7 @@ export interface FileRouteTypes {
     | '/admin/pyq-discovery'
     | '/admin/sources'
     | '/admin/syllabus'
+    | '/admin/video-reconstruction'
     | '/admin/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -218,6 +229,7 @@ export interface FileRouteTypes {
     | '/admin/pyq-discovery'
     | '/admin/sources'
     | '/admin/syllabus'
+    | '/admin/video-reconstruction'
     | '/admin'
   id:
     | '__root__'
@@ -238,6 +250,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/pyq-discovery'
     | '/_authenticated/admin/sources'
     | '/_authenticated/admin/syllabus'
+    | '/_authenticated/admin/video-reconstruction'
     | '/_authenticated/admin/'
   fileRoutesById: FileRoutesById
 }
@@ -375,6 +388,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminSyllabusRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
+    '/_authenticated/admin/video-reconstruction': {
+      id: '/_authenticated/admin/video-reconstruction'
+      path: '/video-reconstruction'
+      fullPath: '/admin/video-reconstruction'
+      preLoaderRoute: typeof AuthenticatedAdminVideoReconstructionRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
   }
 }
 
@@ -385,6 +405,7 @@ interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminPyqDiscoveryRoute: typeof AuthenticatedAdminPyqDiscoveryRoute
   AuthenticatedAdminSourcesRoute: typeof AuthenticatedAdminSourcesRoute
   AuthenticatedAdminSyllabusRoute: typeof AuthenticatedAdminSyllabusRoute
+  AuthenticatedAdminVideoReconstructionRoute: typeof AuthenticatedAdminVideoReconstructionRoute
   AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
 }
 
@@ -397,6 +418,8 @@ const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren
     AuthenticatedAdminPyqDiscoveryRoute: AuthenticatedAdminPyqDiscoveryRoute,
     AuthenticatedAdminSourcesRoute: AuthenticatedAdminSourcesRoute,
     AuthenticatedAdminSyllabusRoute: AuthenticatedAdminSyllabusRoute,
+    AuthenticatedAdminVideoReconstructionRoute:
+      AuthenticatedAdminVideoReconstructionRoute,
     AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
   }
 

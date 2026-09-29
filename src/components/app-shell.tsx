@@ -43,6 +43,7 @@ const adminNav: NavItem[] = [
   { to: "/admin/documents", label: "Documents", icon: FileStack },
   { to: "/admin/collection-runs", label: "Collection runs", icon: Repeat },
   { to: "/admin/pyq-discovery", label: "PYQ Discovery", icon: Library },
+  { to: "/admin/video-reconstruction", label: "Video Reconstruction", icon: FileStack },
 ];
 
 function NavLinks({ items, onNavigate }: { items: NavItem[]; onNavigate?: (() => void) | undefined }) {
