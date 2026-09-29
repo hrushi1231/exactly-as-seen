@@ -21,6 +21,8 @@ export interface Subject {
   description: string | null;
   display_order: number;
   status: string;
+  source_id: string | null;
+  source_text: string | null;
 }
 
 export interface Topic {
@@ -33,6 +35,8 @@ export interface Topic {
   display_order: number;
   estimated_minutes: number | null;
   status: string;
+  source_id: string | null;
+  source_text: string | null;
 }
 
 export interface Subtopic {
@@ -44,6 +48,8 @@ export interface Subtopic {
   display_order: number;
   estimated_minutes: number | null;
   status: string;
+  source_id: string | null;
+  source_text: string | null;
 }
 
 export interface Mapping {
@@ -59,6 +65,8 @@ export interface Progress {
   entity_type: EntityType;
   entity_id: string;
   status: string;
+  source_id: string | null;
+  source_text: string | null;
 }
 
 export function slugify(value: string) {
