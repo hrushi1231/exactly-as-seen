@@ -11,9 +11,11 @@ import {
   Upload,
   ArrowUp,
   ArrowDown,
+  FileText,
 } from "lucide-react";
 import { toast } from "sonner";
 import { AppShell } from "@/components/app-shell";
+import { VerificationBadge } from "@/components/verification-badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -69,6 +71,23 @@ type Draft = {
   status: string;
   display_order: number;
 };
+
+type StatusFilter = "all" | "verified" | "unverified" | "needs_review" | "missing_wording" | "missing_page";
+
+function SourceMeta({ node, onOpen }: { node: Topic | Subtopic; onOpen: () => void }) {
+  return (
+    <button
+      onClick={onOpen}
+      className="flex shrink-0 items-center gap-1.5 rounded px-1 text-[11px] text-muted-foreground hover:bg-secondary"
+      aria-label="Open source information"
+      title="Open source information"
+    >
+      <span className="tabular-nums">{node.source_page ? `p.${node.source_page}` : "no page"}</span>
+      <VerificationBadge status={node.verification_status} compact />
+      <FileText className="h-3.5 w-3.5" />
+    </button>
+  );
+}
 
 const TABLES: Record<EntityType, "subjects" | "topics" | "subtopics"> = {
   subject: "subjects",
