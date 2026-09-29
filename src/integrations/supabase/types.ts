@@ -14,16 +14,367 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      exam_patterns: {
+        Row: {
+          created_at: string
+          duration_minutes: number | null
+          exam_id: string
+          id: string
+          label: string | null
+          negative_marking: number | null
+          notes: string | null
+          total_marks: number | null
+          total_questions: number | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          duration_minutes?: number | null
+          exam_id: string
+          id?: string
+          label?: string | null
+          negative_marking?: number | null
+          notes?: string | null
+          total_marks?: number | null
+          total_questions?: number | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          duration_minutes?: number | null
+          exam_id?: string
+          id?: string
+          label?: string | null
+          negative_marking?: number | null
+          notes?: string | null
+          total_marks?: number | null
+          total_questions?: number | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "exam_patterns_exam_id_fkey"
+            columns: ["exam_id"]
+            isOneToOne: false
+            referencedRelation: "exams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      exam_syllabus_mapping: {
+        Row: {
+          created_at: string
+          entity_id: string
+          entity_type: Database["public"]["Enums"]["syllabus_entity"]
+          exam_id: string
+          id: string
+          is_included: boolean
+          notes: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          entity_id: string
+          entity_type: Database["public"]["Enums"]["syllabus_entity"]
+          exam_id: string
+          id?: string
+          is_included?: boolean
+          notes?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          entity_id?: string
+          entity_type?: Database["public"]["Enums"]["syllabus_entity"]
+          exam_id?: string
+          id?: string
+          is_included?: boolean
+          notes?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "exam_syllabus_mapping_exam_id_fkey"
+            columns: ["exam_id"]
+            isOneToOne: false
+            referencedRelation: "exams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      exams: {
+        Row: {
+          created_at: string
+          display_order: number
+          id: string
+          is_primary: boolean
+          name: string
+          organization: string | null
+          post_name: string | null
+          slug: string
+          status: string
+          subject_name: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          display_order?: number
+          id?: string
+          is_primary?: boolean
+          name: string
+          organization?: string | null
+          post_name?: string | null
+          slug: string
+          status?: string
+          subject_name?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          display_order?: number
+          id?: string
+          is_primary?: boolean
+          name?: string
+          organization?: string | null
+          post_name?: string | null
+          slug?: string
+          status?: string
+          subject_name?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          email: string | null
+          full_name: string | null
+          id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      subjects: {
+        Row: {
+          created_at: string
+          description: string | null
+          display_order: number
+          id: string
+          name: string
+          slug: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          display_order?: number
+          id?: string
+          name: string
+          slug: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          display_order?: number
+          id?: string
+          name?: string
+          slug?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      subtopics: {
+        Row: {
+          created_at: string
+          description: string | null
+          display_order: number
+          estimated_minutes: number | null
+          id: string
+          name: string
+          slug: string
+          status: string
+          topic_id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          display_order?: number
+          estimated_minutes?: number | null
+          id?: string
+          name: string
+          slug: string
+          status?: string
+          topic_id: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          display_order?: number
+          estimated_minutes?: number | null
+          id?: string
+          name?: string
+          slug?: string
+          status?: string
+          topic_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "subtopics_topic_id_fkey"
+            columns: ["topic_id"]
+            isOneToOne: false
+            referencedRelation: "topics"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      topics: {
+        Row: {
+          created_at: string
+          description: string | null
+          display_order: number
+          estimated_minutes: number | null
+          id: string
+          name: string
+          parent_topic_id: string | null
+          slug: string
+          status: string
+          subject_id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          display_order?: number
+          estimated_minutes?: number | null
+          id?: string
+          name: string
+          parent_topic_id?: string | null
+          slug: string
+          status?: string
+          subject_id: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          display_order?: number
+          estimated_minutes?: number | null
+          id?: string
+          name?: string
+          parent_topic_id?: string | null
+          slug?: string
+          status?: string
+          subject_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "topics_parent_topic_id_fkey"
+            columns: ["parent_topic_id"]
+            isOneToOne: false
+            referencedRelation: "topics"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "topics_subject_id_fkey"
+            columns: ["subject_id"]
+            isOneToOne: false
+            referencedRelation: "subjects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_topic_progress: {
+        Row: {
+          completed_at: string | null
+          created_at: string
+          entity_id: string
+          entity_type: Database["public"]["Enums"]["syllabus_entity"]
+          id: string
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string
+          entity_id: string
+          entity_type: Database["public"]["Enums"]["syllabus_entity"]
+          id?: string
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string
+          entity_id?: string
+          entity_type?: Database["public"]["Enums"]["syllabus_entity"]
+          id?: string
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "learner"
+      syllabus_entity: "subject" | "topic" | "subtopic"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +501,9 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "learner"],
+      syllabus_entity: ["subject", "topic", "subtopic"],
+    },
   },
 } as const
