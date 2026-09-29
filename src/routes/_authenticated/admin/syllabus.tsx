@@ -271,13 +271,31 @@ function SyllabusAdmin() {
     );
 
   function exportJson() {
+    const src = (sources.data ?? [])[0];
     const data = {
+      source: src
+        ? {
+            source_title: src.source_title,
+            source_url: src.source_url,
+            source_document_version: src.source_document_version,
+            source_recruitment_context: src.source_recruitment_context,
+            source_page_start: src.source_page_start,
+            source_page_end: src.source_page_end,
+            source_type: src.source_type,
+            is_verified: src.is_verified,
+            notes: src.notes,
+          }
+        : undefined,
       subjects: (subjects.data ?? []).map((subject) => ({
         name: subject.name,
         slug: subject.slug,
         description: subject.description,
         display_order: subject.display_order,
         status: subject.status,
+        source_text: subject.source_text,
+        original_syllabus_wording: subject.original_syllabus_wording,
+        source_page: subject.source_page,
+        verification_status: subject.verification_status,
         exams: (exams.data ?? []).filter((e) => isMapped(e.id, "subject", subject.id)).map((e) => e.slug),
         topics: (topics.data ?? [])
           .filter((t) => t.subject_id === subject.id)
@@ -289,6 +307,10 @@ function SyllabusAdmin() {
             display_order: topic.display_order,
             estimated_minutes: topic.estimated_minutes,
             status: topic.status,
+            original_syllabus_wording: topic.original_syllabus_wording,
+            source_page: topic.source_page,
+            source_page_end: topic.source_page_end,
+            verification_status: topic.verification_status,
             exams: (exams.data ?? [])
               .filter((e) => isMapped(e.id, "topic", topic.id))
               .map((e) => e.slug),
@@ -302,6 +324,9 @@ function SyllabusAdmin() {
                 display_order: sub.display_order,
                 estimated_minutes: sub.estimated_minutes,
                 status: sub.status,
+                original_syllabus_wording: sub.original_syllabus_wording,
+                source_page: sub.source_page,
+                verification_status: sub.verification_status,
                 exams: (exams.data ?? [])
                   .filter((e) => isMapped(e.id, "subtopic", sub.id))
                   .map((e) => e.slug),
