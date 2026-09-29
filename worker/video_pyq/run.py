@@ -40,6 +40,10 @@ def log(*a):
 
 # ---------------- DB (PostgREST, service role: worker host only) ----------------
 def db(method, path, body=None, params=None):
+    # PostgREST bulk inserts require identical keys on every row; fill missing keys with null.
+    if isinstance(body, list) and body:
+        keys = set().union(*(b.keys() for b in body))
+        body = [{k: b.get(k) for k in keys} for b in body]
     for attempt in range(4):
         r = requests.request(method, f"{SB}/{path}", headers=H, json=body, params=params, timeout=60)
         if r.status_code < 500:
