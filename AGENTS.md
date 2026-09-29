@@ -15,3 +15,5 @@
 - Raw files are stored once per SHA-256 in the private `source-documents` bucket; extra sources become `document_provenance` rows — avoids duplicate physical copies.
 - Internet discovery providers live in `src/lib/discovery/providers.server.ts` behind a `DiscoveryProvider` interface with no DB access — another search engine can be added without touching the document pipeline.
 - Discovery never marks a year "exhaustive" automatically; only an admin does — one automated pass is not proof of absence.
+- Lead resolution logic lives in `src/lib/discovery/resolver.server.ts` (no DB access); the shared download pipeline is `src/lib/collector/core.server.ts` so resolver and collector use one path.
+- Real exam cycles (`exam_cycles`) are separate from calendar-year search rows; recruitment year and exam year are stored separately so one cycle is never counted twice.
