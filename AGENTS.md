@@ -17,3 +17,6 @@
 - Discovery never marks a year "exhaustive" automatically; only an admin does — one automated pass is not proof of absence.
 - Lead resolution logic lives in `src/lib/discovery/resolver.server.ts` (no DB access); the shared download pipeline is `src/lib/collector/core.server.ts` so resolver and collector use one path.
 - Real exam cycles (`exam_cycles`) are separate from calendar-year search rows; recruitment year and exam year are stored separately so one cycle is never counted twice.
+- Video PYQ reconstruction runs only in the external Python worker `worker/video_pyq/` (yt-dlp, FFmpeg, faster-whisper, PaddleOCR) with its own service-role key — never in the browser or server functions.
+- Video-derived answers are PRESENTER_STATED/PRESENTER_VISUAL only; a video's cycle is never assigned when it was uploaded before that cycle's `exam_start_date` — upload year is not exam year.
+- Reconstructed questions keep `source_text`, raw option text and `question_evidence` rows untouched; admin edits change only normalized fields; merges move evidence, never delete it.
