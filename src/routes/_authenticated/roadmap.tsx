@@ -297,8 +297,8 @@ function DetailPanel({
   mappings,
   onClose,
 }: {
-  topic?: Topic;
-  subtopic?: Subtopic;
+  topic?: Topic | undefined;
+  subtopic?: Subtopic | undefined;
   subjects: Subject[];
   topics: Topic[];
   exams: Exam[];

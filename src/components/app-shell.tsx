@@ -42,7 +42,7 @@ const adminNav: NavItem[] = [
   { to: "/admin/sources", label: "Sources", icon: Settings },
 ];
 
-function NavLinks({ items, onNavigate }: { items: NavItem[]; onNavigate?: () => void }) {
+function NavLinks({ items, onNavigate }: { items: NavItem[]; onNavigate?: (() => void) | undefined }) {
   return (
     <div className="space-y-0.5">
       {items.map((item) => (
@@ -64,7 +64,7 @@ function NavLinks({ items, onNavigate }: { items: NavItem[]; onNavigate?: () => 
   );
 }
 
-function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
+function SidebarContent({ onNavigate }: { onNavigate?: (() => void) | undefined }) {
   const { isAdmin, user } = useAuth();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -125,8 +125,8 @@ export function AppShell({
   children,
 }: {
   title: string;
-  description?: string;
-  actions?: ReactNode;
+  description?: string | undefined;
+  actions?: ReactNode | undefined;
   children: ReactNode;
 }) {
   const [open, setOpen] = useState(false);

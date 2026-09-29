@@ -59,8 +59,8 @@ export const Route = createFileRoute("/_authenticated/admin/syllabus")({
 
 type Draft = {
   type: EntityType;
-  id?: string;
-  parentId?: string;
+  id?: string | undefined;
+  parentId?: string | undefined;
   name: string;
   slug: string;
   description: string;
@@ -114,7 +114,7 @@ function SyllabusAdmin() {
         ? Number(input.estimated_minutes)
         : null;
 
-      let payload: Record<string, unknown> = base;
+      let payload: Record<string, any> = base;
       if (input.type === "topic") {
         payload = { ...base, estimated_minutes: minutes, subject_id: input.parentId };
       } else if (input.type === "subtopic") {
@@ -123,7 +123,7 @@ function SyllabusAdmin() {
 
       const table = TABLES[input.type];
       const query = input.id
-        ? supabase.from(table).update(payload).eq("id", input.id)
+        ? supabase.from(table).update(payload as never).eq("id", input.id)
         : supabase.from(table).insert(payload as never);
       const { error } = await query;
       if (error) throw new Error(error.message);
@@ -218,7 +218,7 @@ function SyllabusAdmin() {
       subject,
       topics: entries.filter(
         ({ topic, subtopics: subs }) =>
-          (matches(topic.name) || subs.some((s) => matches(s.name)) || matches(subject.name)) &&
+          (matches(topic.name) || subs.some((s) => matches(s['name'])) || matches(subject.name)) &&
           (examFilter === "all" ||
             passesExam("topic", topic.id) ||
             subs.some((s) => passesExam("subtopic", s.id))),
@@ -287,11 +287,11 @@ function SyllabusAdmin() {
       for (const [si, rawSubject] of parsed.subjects.entries()) {
         const s = rawSubject as Record<string, any>;
         const subjectRow = {
-          name: String(s.name ?? "").trim(),
-          slug: String(s.slug ?? slugify(String(s.name ?? ""))),
-          description: s.description ?? null,
-          display_order: Number(s.display_order ?? si),
-          status: String(s.status ?? "active"),
+          name: String(s['name'] ?? "").trim(),
+          slug: String(s['slug'] ?? slugify(String(s['name'] ?? ""))),
+          description: s['description'] ?? null,
+          display_order: Number(s['display_order'] ?? si),
+          status: String(s['status'] ?? "active"),
         };
         if (!subjectRow.name) continue;
         const { data: subject, error: subjectError } = await supabase
@@ -301,7 +301,7 @@ function SyllabusAdmin() {
           .single();
         if (subjectError) throw new Error(subjectError.message);
 
-        for (const [ti, rawTopic] of ((s.topics ?? []) as any[]).entries()) {
+        for (const [ti, rawTopic] of ((s['topics'] ?? []) as any[]).entries()) {
           const topicRow = {
             subject_id: subject.id,
             name: String(rawTopic.name ?? "").trim(),
