@@ -40,6 +40,8 @@ const adminNav: NavItem[] = [
   { to: "/admin/exams", label: "Exams", icon: GraduationCap },
   { to: "/admin/syllabus", label: "Syllabus", icon: Library },
   { to: "/admin/sources", label: "Sources", icon: Settings },
+  { to: "/admin/documents", label: "Documents", icon: FileStack },
+  { to: "/admin/collection-runs", label: "Collection runs", icon: Repeat },
 ];
 
 function NavLinks({ items, onNavigate }: { items: NavItem[]; onNavigate?: (() => void) | undefined }) {
@@ -187,8 +189,7 @@ export function PhasePlaceholder({ feature }: { feature: string }) {
     <div className="mx-auto max-w-lg rounded-md border border-dashed border-border bg-card px-6 py-14 text-center">
       <h2 className="text-sm font-semibold text-foreground">{feature} arrives in a later phase</h2>
       <p className="mx-auto mt-2 max-w-sm text-sm text-muted-foreground">
-        Phase 01 covers the application foundation, exam configuration and syllabus management. This
-        section will be built once that groundwork is in place.
+        This section is planned for a later build phase and is intentionally not available yet.
       </p>
     </div>
   );

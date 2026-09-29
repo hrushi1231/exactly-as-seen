@@ -151,7 +151,7 @@ export const downloadDocument = auth
       await logEvent(supabase, runId, "error", msg, { url: doc.source_url, document_id: doc.id });
       await supabase
         .from("documents")
-        .update({ download_status: "failed", source_notes: null })
+        .update({ download_status: "failed" })
         .eq("id", doc.id);
       await finishRun(supabase, runId, "failed", { errors: 1 });
       return { runId, status: "failed" as const, message: msg };
