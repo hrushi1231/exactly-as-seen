@@ -230,7 +230,8 @@ export const secondPassSearch = auth
     const have = new Set((gold ?? []).map((g) => g.artifact_type));
     const q: { query: string; kind: string }[] = [];
     const advt = cy.advertisement_number ? `Advt ${cy.advertisement_number}` : "";
-    const date = cy.exam_date ?? "";
+    // Use a short date phrase only (long notes make poor search queries).
+    const date = cy.exam_date && cy.exam_date.length <= 25 ? cy.exam_date : "";
     if (!have.has("question_paper")) {
       q.push({ kind: "second_pass_paper", query: `OAVS ${postName} ${date || year} question paper ${advt}`.replace(/\s+/g, " ").trim() });
       q.push({ kind: "second_pass_paper", query: `"Odisha Adarsha Vidyalaya" "${postName}" ${year} question paper pdf` });
